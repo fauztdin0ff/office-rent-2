@@ -708,32 +708,53 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+/*==========================================================================
+Bussones center slider
+============================================================================*/
+const bcSlider = document.querySelector(".business-center__slider");
 
-/*------------------------------Увеличение---------------------------*/
-const sliderImgs = document.querySelectorAll('.business-center__slide .super-flow-image > img');
-
-if (sliderImgs.length > 0) {
-   const dynamicEl = Array.from(sliderImgs).map(img => ({
-      src: img.src,
-      thumb: img.src,
-      subHtml: ''
-   }));
-
-   const zoomBtn = document.querySelector('.business-center__zoom');
-
-   const gallery = lightGallery(zoomBtn, {
-      dynamic: true,
-      dynamicEl,
-      download: false,
-      mobileSettings: {
-         showCloseIcon: true
+if (bcSlider) {
+   const bcSwiper = new Swiper(bcSlider, {
+      loop: true,
+      spaceBetween: 0,
+      effect: 'fade',
+      direction: "horizontal",
+      slidesPerView: 1,
+      pagination: {
+         el: ".business-center__pagination",
+         clickable: true,
+      },
+      speed: 1000,
+      autoplay: {
+         delay: 3000,
+         disableOnInteraction: false
       }
    });
-
-   zoomBtn.addEventListener("click", () => {
-      gallery.openGallery(0);
-   });
 }
+
+
+
+/*------------------------------Галерея---------------------------*/
+document.getElementById('openGallery').addEventListener('click', () => {
+   const slides = document.querySelectorAll('.business-center__slide');
+
+   const items = Array.from(slides)
+      .map(slide => {
+         const img = slide.querySelector('img');
+         if (!img) return null;
+         return {
+            src: img.src,
+            type: 'image',
+            caption: img.alt || ''
+         };
+      })
+      .filter(item => item !== null);
+
+   if (items.length === 0) return;
+
+   Fancybox.show(items);
+});
+
 
 /*==========================================================================
 Hidden text
