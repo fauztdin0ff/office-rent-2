@@ -911,12 +911,6 @@ if (productGallerySlider && productGallerySlider2) {
          el: 'office__gallery-pagination',
          clickable: true,
       },
-      freeMode: {
-         enabled: true,
-         momentum: true,
-         momentumRatio: 1,
-         momentumBounce: false,
-      },
       pagination: {
          el: '.office__gallery-pagination',
          clickable: true,
@@ -924,7 +918,6 @@ if (productGallerySlider && productGallerySlider2) {
       breakpoints: {
          320: {
             direction: 'horizontal',
-            freeMode: false,
             slidesPerView: 'auto',
             spaceBetween: 10,
          },
