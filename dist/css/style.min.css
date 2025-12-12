@@ -5422,11 +5422,11 @@ Office info
   background: #f8f8ff;
 }
 .office-info__body {
-  padding: 36px 0;
+  padding: 36px 0 60px;
 }
 @media (width < 1100px) {
   .office-info__body {
-    padding: 20px 0;
+    padding: 20px 0 40px;
   }
 }
 .office-info__title {
