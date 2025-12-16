@@ -262,6 +262,8 @@ Preloader
 document.addEventListener("DOMContentLoaded", () => {
    const preloader = document.querySelector(".preloader");
 
+   if (!preloader) return;
+
    const MIN_TIME = 1000;
    const startTime = Date.now();
 
@@ -278,6 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, delay);
    });
 });
+
 
 /*==========================================================================
 Header fix
@@ -974,49 +977,84 @@ document.addEventListener('DOMContentLoaded', () => {
 /*==========================================================================
 NEW BC PAGE SLIDER
 ============================================================================*/
-const bcContainer = document.querySelector('.bc-hero__slider');
-if (bcContainer) {
-   const swiper = new Swiper('.bc-hero__slider', {
-      loop: false,
-      direction: 'vertical',
-      /*  effect: "fade", */
-      speed: 1000,
-      slidesPerView: 1,
-      watchOverflow: true,
-      simulateTouch: true,
-      mousewheel: true,
-      grabCursor: false,
-      slideToClickedSlide: false,
-      speed: 1500,
-      /* autoplay: {
-         delay: 5000,
-         disableOnInteraction: false
-      }, */
-      pagination: {
-         el: '.bc-hero__fraction',
-         type: 'custom',
-         clickable: true,
-         renderCustom: function (swiper, current, total) {
-            let paginationHtml = '';
-            for (let i = 1; i <= total; i++) {
-               paginationHtml += `<span class="swiper-pagination-item ${i === current ? 'active' : ''
-                  }" data-index="${i}">${i.toString().padStart(2, '0')}.</span>`;
-            }
-            return paginationHtml;
-         },
-      },
-   });
+let bcSwiper = null;
 
+function updateBcSwiper() {
+   const bcContainer = document.querySelector('.bc-hero__slider');
+   if (!bcContainer) return;
+
+   const bcWrapper = bcContainer.querySelector('.bc-hero__slider-wrapper');
+   const bcSlides = bcWrapper.querySelectorAll('.bc-hero__slide');
    const paginationElement = document.querySelector('.bc-hero__fraction');
-   if (paginationElement) {
-      paginationElement.addEventListener('click', (e) => {
-         if (e.target.classList.contains('swiper-pagination-item')) {
-            const index = parseInt(e.target.getAttribute('data-index'), 10);
-            swiper.slideToLoop(index - 1);
+
+   if (window.innerWidth >= 1200) {
+      if (!bcSwiper) {
+         // Добавляем классы swiper, если их нет
+         bcContainer.classList.add('swiper');
+         bcWrapper.classList.add('swiper-wrapper');
+         bcSlides.forEach(slide => slide.classList.add('swiper-slide'));
+
+         bcSwiper = new Swiper('.bc-hero__slider', {
+            loop: false,
+            direction: 'vertical',
+            slidesPerView: 1,
+            watchOverflow: true,
+            simulateTouch: true,
+            mousewheel: true,
+            grabCursor: false,
+            slideToClickedSlide: false,
+            speed: 1500,
+            pagination: {
+               el: '.bc-hero__fraction',
+               type: 'custom',
+               clickable: true,
+               renderCustom: function (swiper, current, total) {
+                  let paginationHtml = '';
+                  for (let i = 1; i <= total; i++) {
+                     paginationHtml += `<span class="swiper-pagination-item ${i === current ? 'active' : ''}" data-index="${i}">${i.toString().padStart(2, '0')}.</span>`;
+                  }
+                  return paginationHtml;
+               },
+            },
+         });
+
+         if (paginationElement) {
+            paginationElement.addEventListener('click', (e) => {
+               if (e.target.classList.contains('swiper-pagination-item')) {
+                  const index = parseInt(e.target.getAttribute('data-index'), 10);
+                  bcSwiper.slideTo(index - 1);
+               }
+            });
          }
+      }
+   } else {
+      // Уничтожаем слайдер, если он есть
+      if (bcSwiper) {
+         bcSwiper.destroy(true, true);
+         bcSwiper = null;
+      }
+
+      // Убираем классы Swiper **всегда**, даже если слайдера не было
+      bcContainer.classList.remove('swiper');
+      bcWrapper.classList.remove('swiper-wrapper');
+      bcSlides.forEach(slide => {
+         slide.classList.remove(
+            'swiper-slide',
+            'swiper-slide-active',
+            'swiper-slide-next',
+            'swiper-slide-prev'
+         );
       });
+
+      // Чистим кастомную пагинацию
+      if (paginationElement) paginationElement.innerHTML = '';
    }
 }
+
+// При загрузке и при ресайзе
+window.addEventListener('load', updateBcSwiper);
+window.addEventListener('resize', updateBcSwiper);
+
 })();
 
 /******/ })()
