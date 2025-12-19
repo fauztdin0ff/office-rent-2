@@ -750,6 +750,7 @@ header sec
 .header-sec .header__body {
   background: rgba(255, 255, 255, 0.2) !important;
   backdrop-filter: blur(40px) !important;
+  gap: 32px;
 }
 .header-sec .header__body .header__logo {
   max-width: 40px;
@@ -6449,6 +6450,10 @@ NEW BC PAGE
   .bc-hero__slide .office-info__related-info {
     gap: 15px 10px;
   }
+  .bc-hero__slide .office-info__related-name {
+    gap: 10px;
+    margin-right: 5px;
+  }
   .bc-hero__slide .office-info__related-offices-more {
     display: block;
     margin-top: 20px;
@@ -6541,6 +6546,13 @@ NEW BC PAGE
   }
   .bc-hero__slide .reviews__body {
     padding: 20px 16px;
+  }
+  .bc-hero__slide .reviews__buttons {
+    display: flex;
+    top: 48px;
+  }
+  .bc-hero__slide .reviews__slide-photos img:not(:first-child) {
+    display: none;
   }
 }
 .bc-hero__slide-image {

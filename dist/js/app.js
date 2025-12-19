@@ -1056,23 +1056,21 @@ function updateBcSwiper() {
 window.addEventListener('load', updateBcSwiper);
 window.addEventListener('resize', updateBcSwiper);
 
-function bindInnerScroll(swiper) {
-   const scrollBlocks = document.querySelectorAll('.office-info__related-offices');
 
-   scrollBlocks.forEach(block => {
-      block.addEventListener('mouseenter', () => {
-         if (swiper.mousewheel) {
-            swiper.mousewheel.disable();
-         }
-      });
+document.addEventListener('DOMContentLoaded', () => {
+   document.querySelectorAll('.js-slide-link').forEach(link => {
+      link.addEventListener('click', e => {
+         if (bcSwiper && window.innerWidth >= 1200) {
+            e.preventDefault();
 
-      block.addEventListener('mouseleave', () => {
-         if (swiper.mousewheel) {
-            swiper.mousewheel.enable();
+            const index = Number(link.dataset.slide);
+            if (!Number.isNaN(index)) {
+               bcSwiper.slideTo(index, 1500);
+            }
          }
       });
    });
-}
+});
 
 })();
 

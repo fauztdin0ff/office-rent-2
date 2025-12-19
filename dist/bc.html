@@ -126,7 +126,7 @@
 <header class="header blur header-sec">
    <div class="header__body container">
       <div class="header__logo">
-         <a href="index.html" aria-label="На главную">
+         <a href="#start" class="js-slide-link" data-slide="0" aria-label="На главную">
             <img src="img/logo-icon.png" width="177" height="64" alt="logo">
          </a>
       </div>
@@ -134,10 +134,10 @@
          <div class="menu__icon"><span></span></div>
          <div class="menu__body">
             <ul class="menu__list">
-               <li><a href="" class="menu__link active">Офисы</a></li>
-               <li><a href="" class="menu__link">Описание</a></li>
-               <li><a href="" class="menu__link">Отзывы</a></li>
-               <li><a href="" class="menu__link">Расположение</a></li>
+               <li><a href="#offices" class="menu__link js-slide-link" data-slide="1">Офисы</a></li>
+               <li><a href="#about" class="menu__link js-slide-link" data-slide="2">Описание</a></li>
+               <li><a href="#reviews" class="menu__link js-slide-link" data-slide="3">Отзывы</a></li>
+               <li><a href="#geo" class="menu__link js-slide-link" data-slide="4">Расположение</a></li>
             </ul>
             <div class="menu__contacts">
                <a href="tel:+74951234567" class="menu__contact">
@@ -187,7 +187,7 @@
          <section class="bc-hero">
             <div class="bc-hero__slider swiper">
                <div class="bc-hero__slider-wrapper swiper-wrapper">
-                  <div class="bc-hero__slide swiper-slide">
+                  <div class="bc-hero__slide swiper-slide" id="start">
                      <img src="img/bc/1.jpg" class="bc-hero__slide-image" alt="">
                      <div class="bc-hero__slide-info container">
                         <div class="bc-hero__slide-text">
@@ -205,7 +205,7 @@
                      </div>
                   </div>
 
-                  <div class="bc-hero__slide swiper-slide">
+                  <div class="bc-hero__slide swiper-slide" id="offices">
                      <img src="img/bc/22.webp" class="bc-hero__slide-image" alt="">
                      <div class="bc-hero__slide-info container">
                         <div class="bc-hero__slide-info-card">
@@ -229,7 +229,232 @@
                                                 <div class="office-info__related-image">
                                                    <img src="img/offices/5.jpg" alt="">
                                                 </div>
-                                                1345 м²
+                                                10 345 м²
+                                             </a>
+                                             <div class="office-info__related-floor">3 этаж</div>
+                                             <div class="office-info__related-workplace">
+                                                <span class="office-info__related-label">Рабочих мест</span>125
+                                             </div>
+                                             <div class="office-info__related-layout">
+                                                <span class="office-info__related-label">Планировка</span> Смешанная
+                                             </div>
+                                             <div class="office-info__related-price">
+                                             </div>
+                                             <div class="office-info__related-price">
+                                             </div>
+                                          </div>
+                                          <div class="office-info__related-btns">
+                                             <button type="button"
+                                                class="office-info__related-btn btn -pres">Презентация</button>
+                                             <button type="button" class="office-info__related-btn btn -callback">
+                                                <img src="img/icons/telephone.svg" width="16" height="16"
+                                                   alt="tel icon">
+                                                Заказать звонок
+                                             </button>
+                                             <div class="office-info__related-socials">
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в whatsapp">
+                                                   <img src="img/icons/whatsapp.svg" width="20" height="20"
+                                                      alt="whatsapp icon">
+                                                </a>
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в telegram">
+                                                   <img src="img/icons/telegram.svg" width="20" height="20"
+                                                      alt="telegram icon">
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                       <div class="office-info__related-office">
+                                          <div class="office-info__related-info">
+                                             <a href="" class="office-info__related-name">
+                                                <div class="office-info__related-image">
+                                                   <img src="img/offices/3.jpg" alt="">
+                                                </div>
+                                                345 м²
+                                             </a>
+                                             <div class="office-info__related-floor">3 этаж</div>
+                                             <div class="office-info__related-workplace">
+                                                <span class="office-info__related-label">Рабочих мест</span>125
+                                             </div>
+                                             <div class="office-info__related-layout">
+                                                <span class="office-info__related-label">Планировка</span> Смешанная
+                                             </div>
+                                             <div class="office-info__related-price">
+                                                <span class="office-info__related-label">м² в год</span> 346 600 ₽
+                                             </div>
+                                             <div class="office-info__related-price">
+                                                <span class="office-info__related-label">в месяц</span> 552 600 ₽
+                                             </div>
+                                          </div>
+                                          <div class="office-info__related-btns">
+                                             <button type="button"
+                                                class="office-info__related-btn btn -pres">Презентация</button>
+                                             <button type="button" class="office-info__related-btn btn -callback">
+                                                <img src="img/icons/telephone.svg" width="16" height="16"
+                                                   alt="tel icon">
+                                                Заказать звонок
+                                             </button>
+                                             <div class="office-info__related-socials">
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в whatsapp">
+                                                   <img src="img/icons/whatsapp.svg" width="20" height="20"
+                                                      alt="whatsapp icon">
+                                                </a>
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в telegram">
+                                                   <img src="img/icons/telegram.svg" width="20" height="20"
+                                                      alt="telegram icon">
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                       <div class="office-info__related-office">
+                                          <div class="office-info__related-info">
+                                             <a href="" class="office-info__related-name">
+                                                <div class="office-info__related-image">
+                                                   <img src="img/offices/2.jpg" alt="">
+                                                </div>
+                                                345 м²
+                                             </a>
+                                             <div class="office-info__related-floor">3 этаж</div>
+                                             <div class="office-info__related-workplace">
+                                                <span class="office-info__related-label">Рабочих мест</span>125
+                                             </div>
+                                             <div class="office-info__related-layout">
+                                                <span class="office-info__related-label">Планировка</span> Смешанная
+                                             </div>
+                                             <div class="office-info__related-price">
+                                             </div>
+                                             <div class="office-info__related-price">
+                                             </div>
+                                          </div>
+                                          <div class="office-info__related-btns">
+                                             <a href="tel:+74951234567" class="office-info__related-tel">+7 495 123 45
+                                                67</a>
+                                             <button type="button" class="office-info__related-btn btn -callback">
+                                                <img src="img/icons/telephone.svg" width="16" height="16"
+                                                   alt="tel icon">
+                                                Заказать звонок
+                                             </button>
+                                             <div class="office-info__related-socials">
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в whatsapp">
+                                                   <img src="img/icons/whatsapp.svg" width="20" height="20"
+                                                      alt="whatsapp icon">
+                                                </a>
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в telegram">
+                                                   <img src="img/icons/telegram.svg" width="20" height="20"
+                                                      alt="telegram icon">
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                       <div class="office-info__related-office">
+                                          <div class="office-info__related-info">
+                                             <a href="" class="office-info__related-name">
+                                                <div class="office-info__related-image">
+                                                   <img src="img/offices/7.jpg" alt="">
+                                                </div>
+                                                345 м²
+                                             </a>
+                                             <div class="office-info__related-price">
+                                                <span class="office-info__related-label">м² в год</span> 346 600 ₽
+                                             </div>
+                                             <div class="office-info__related-price">
+                                                <span class="office-info__related-label">в месяц</span> 552 600 ₽
+                                             </div>
+                                             <div class="office-info__related-floor"></div>
+                                             <div class="office-info__related-workplace">
+                                             </div>
+                                             <div class="office-info__related-layout">
+                                             </div>
+                                          </div>
+                                          <div class="office-info__related-btns">
+                                             <a href="tel:+74951234567" class="office-info__related-tel">+7 495 123 45
+                                                67</a>
+                                             <button type="button" class="office-info__related-btn btn -callback">
+                                                <img src="img/icons/telephone.svg" width="16" height="16"
+                                                   alt="tel icon">
+                                                Заказать звонок
+                                             </button>
+                                             <div class="office-info__related-socials">
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в whatsapp">
+                                                   <img src="img/icons/whatsapp.svg" width="20" height="20"
+                                                      alt="whatsapp icon">
+                                                </a>
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в telegram">
+                                                   <img src="img/icons/telegram.svg" width="20" height="20"
+                                                      alt="telegram icon">
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                       <div class="office-info__related-office">
+                                          <div class="office-info__related-info">
+                                             <a href="" class="office-info__related-name">
+                                                <div class="office-info__related-image">
+                                                   <img src="img/offices/8.jpg" alt="">
+                                                </div>
+                                                345 м²
+                                             </a>
+                                             <div class="office-info__related-price">
+                                                <span class="office-info__related-label">м² в год</span> 346 600 ₽
+                                             </div>
+                                             <div class="office-info__related-price">
+                                                <span class="office-info__related-label">в месяц</span> 552 600 ₽
+                                             </div>
+                                             <div class="office-info__related-floor"></div>
+                                             <div class="office-info__related-workplace">
+                                             </div>
+                                             <div class="office-info__related-layout">
+                                             </div>
+                                          </div>
+                                          <div class="office-info__related-btns">
+                                             <a href="tel:+74951234567" class="office-info__related-tel">+7 495 123 45
+                                                67</a>
+                                             <button type="button" class="office-info__related-btn btn -callback">
+                                                <img src="img/icons/telephone.svg" width="16" height="16"
+                                                   alt="tel icon">
+                                                Заказать звонок
+                                             </button>
+                                             <div class="office-info__related-socials">
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в whatsapp">
+                                                   <img src="img/icons/whatsapp.svg" width="20" height="20"
+                                                      alt="whatsapp icon">
+                                                </a>
+                                                <a href="" class="office-info__related-social"
+                                                   aria-label="Перейти в telegram">
+                                                   <img src="img/icons/telegram.svg" width="20" height="20"
+                                                      alt="telegram icon">
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                    </div>
+                                    <div class="office-info__related-offices-more">
+                                       <a href="" class="btn">Смотреть еще</a>
+                                    </div>
+                                 </div>
+                                 <div class="offices__items" data-tab="2">
+                                    <div class="office-info__related-offices swiper-no-swiping">
+
+                                       <div class="office-info__related-office">
+                                          <div class="office-info__related-info">
+                                             <a href="" class="office-info__related-name">
+                                                <div class="office-info__related-image">
+                                                   <img src="img/offices/5.jpg" alt="">
+                                                </div>
+                                                10345 м²
                                              </a>
                                              <div class="office-info__related-floor">3 этаж</div>
                                              <div class="office-info__related-workplace">
@@ -452,7 +677,7 @@
                      </div>
                   </div>
 
-                  <div class="bc-hero__slide swiper-slide">
+                  <div class="bc-hero__slide swiper-slide" id="about">
                      <img src="img/bc/3.jpg" class="bc-hero__slide-image" alt="">
                      <div class="bc-hero__slide-info container">
                         <div class="bc-hero__card">
@@ -592,7 +817,7 @@
                      </div>
                   </div>
 
-                  <div class="bc-hero__slide swiper-slide">
+                  <div class="bc-hero__slide swiper-slide" id="reviews">
                      <img src="img/bc/3.jpg" class="bc-hero__slide-image" alt="">
                      <div class="bc-hero__slide-info container">
                         <div class="reviews__body">
@@ -686,7 +911,7 @@
                      </div>
                   </div>
 
-                  <div class="bc-hero__slide swiper-slide">
+                  <div class="bc-hero__slide swiper-slide" id="geo">
                      <img src="img/bc/4.jpg" class="bc-hero__slide-image" alt="">
                      <div class="bc-hero__slide-info container">
                         <div class="description__aside">
