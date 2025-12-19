@@ -751,14 +751,32 @@ header sec
   background: rgba(255, 255, 255, 0.2) !important;
   backdrop-filter: blur(40px) !important;
 }
+.header-sec .header__body .header__logo {
+  max-width: 40px;
+}
 .header-sec .header__body .header__logo img {
   filter: grayscale(1) invert(1) brightness(11);
 }
 .header-sec .header__body .menu__link {
   color: #fff;
 }
+@media (hover: hover) {
+  .header-sec .header__body .menu__link:hover {
+    color: #ccc;
+  }
+}
 .header-sec .header__body .header__tel a {
   color: #fff;
+}
+@media (hover: hover) {
+  .header-sec .header__body .header__tel a:hover {
+    color: #ccc;
+  }
+}
+@media (width < 1200px) {
+  .header-sec .header__body .header__menu {
+    display: none;
+  }
 }
 
 /*==========================================================================
@@ -4870,11 +4888,18 @@ Offices
 
 .hidden-text__wrapper {
   transition: all 0.3s linear;
+  scrollbar-color: #ccc rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
 }
-@media (width > 767px) {
-  .hidden-text__wrapper {
-    max-height: unset !important;
-  }
+.hidden-text__wrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
+.hidden-text__wrapper::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 4px;
+}
+.hidden-text__wrapper::-webkit-scrollbar {
+  width: 8px;
 }
 @media (width < 767px) {
   .hidden-text__wrapper {
@@ -5797,6 +5822,7 @@ NEW BC PAGE
   padding: 20px 44px;
   transition: all 0.3s ease;
   margin: 0;
+  white-space: nowrap;
 }
 @media (hover: hover) {
   .bc-hero__slide .offices__more:hover {
@@ -5833,17 +5859,25 @@ NEW BC PAGE
 .bc-hero__slide .office-info__related-office {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(40px);
-  border-radius: 100px;
+  border-radius: 20px;
   border: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 14px 64px;
+  padding: 14px 40px;
   transition: all 0.3s ease;
 }
 .bc-hero__slide .office-info__related-office:has(.office-info__related-name:hover) {
   background-color: rgba(255, 255, 255, 0.5);
+}
+.bc-hero__slide .office-info__related-office:has(.office-info__related-name:hover) .office-info__related-label {
+  color: #fff;
+}
+@media (width < 1200px) {
+  .bc-hero__slide .office-info__related-office:has(.office-info__related-name:hover) .office-info__related-label {
+    color: #7a7f85;
+  }
 }
 .bc-hero__slide .office-info__related-office:not(:last-child) {
   margin-bottom: 5px;
@@ -5854,6 +5888,7 @@ NEW BC PAGE
   justify-content: flex-end;
   gap: 20px;
   min-width: 450px;
+  z-index: 5;
 }
 .bc-hero__slide .office-info__related-btn {
   border-radius: 100px;
@@ -5885,6 +5920,10 @@ NEW BC PAGE
   justify-content: center;
   border-radius: 50%;
   transition: all 0.3s ease;
+}
+.bc-hero__slide .office-info__related-social img {
+  width: 16px;
+  height: 16px;
 }
 .bc-hero__slide .office-info__related-social:first-child {
   background: #2cb742;
@@ -5921,6 +5960,17 @@ NEW BC PAGE
   font-weight: 600;
   white-space: nowrap;
   flex: 0 0 20%;
+  position: static;
+  min-width: 167px;
+}
+.bc-hero__slide .office-info__related-name::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  inset: 0;
+  z-index: 3;
 }
 @media (hover: hover) {
   .bc-hero__slide .office-info__related-name:hover {
@@ -5934,6 +5984,12 @@ NEW BC PAGE
   margin-bottom: 5px;
   color: #ccc;
   font-weight: 600;
+  transition: all 0.3s ease;
+}
+@media (width < 1200px) {
+  .bc-hero__slide .office-info__related-label {
+    color: #7a7f85;
+  }
 }
 .bc-hero__slide .office-info__related-price {
   font-size: 20px;
@@ -5951,6 +6007,9 @@ NEW BC PAGE
   .bc-hero__slide .office-info__related-tel:hover {
     color: #fc9c4d;
   }
+}
+.bc-hero__slide .hidden-text__wrapper {
+  overflow-y: auto;
 }
 .bc-hero__slide .offices__wrapper {
   min-height: 300px;
@@ -5983,6 +6042,7 @@ NEW BC PAGE
 .bc-hero__slide .description__text-wrapper {
   grid-template-columns: 1fr;
   gap: 24px;
+  flex: 1;
 }
 .bc-hero__slide .description__title {
   font-size: 34px;
@@ -5992,6 +6052,10 @@ NEW BC PAGE
 }
 .bc-hero__slide .description__address img {
   filter: invert(1);
+}
+.bc-hero__slide .achievement__text {
+  display: flex;
+  flex-direction: column;
 }
 .bc-hero__slide .achievement__body {
   padding: 48px;
@@ -6032,6 +6096,18 @@ NEW BC PAGE
 .bc-hero__slide .description__orients {
   flex-direction: column;
 }
+.bc-hero__slide .description__characteristics {
+  margin-top: auto;
+}
+.bc-hero__slide .reviews__buttons button {
+  background: none;
+}
+.bc-hero__slide .reviews__buttons svg {
+  color: #7a7f85;
+}
+.bc-hero__slide .office-info__related-offices-more {
+  display: none;
+}
 .bc-hero__slide .description__characteristic {
   padding: 16px 24px;
   gap: 10px;
@@ -6041,23 +6117,29 @@ NEW BC PAGE
 .bc-hero__slide .description__characteristic span {
   color: #ccc;
 }
-@media (width < 1600px) {
+@media (width < 1700px) {
+  .bc-hero__slide .office-info__related-info {
+    font-size: 16px;
+  }
+  .bc-hero__slide .offices__panel {
+    margin-bottom: 20px;
+  }
+  .bc-hero__slide .offices__more {
+    font-size: 16px;
+  }
   .bc-hero__slide .bc-hero__slide-subtitle {
     font-size: 16px;
   }
   .bc-hero__slide .offices__controls {
     padding-inline: 24px;
   }
-  .bc-hero__slide .offices__items {
-    padding: 24px 24px 0 24px;
-  }
   .bc-hero__slide .office-info__related-image {
     flex: 0 1 90px;
     max-width: 90px;
-    height: 70px;
+    height: 60px;
   }
   .bc-hero__slide .office-info__related-name {
-    font-size: 18px;
+    font-size: 16px;
   }
   .bc-hero__slide .office-info__related-price {
     font-size: 16px;
@@ -6065,11 +6147,7 @@ NEW BC PAGE
   .bc-hero__slide .bc-hero__slide-info-card {
     gap: 24px;
   }
-  .bc-hero__slide .offices__tabs {
-    width: 100%;
-  }
   .bc-hero__slide .offices__tab {
-    flex: 1;
     font-size: 18px;
   }
   .bc-hero__slide .description__head {
@@ -6131,7 +6209,23 @@ NEW BC PAGE
     font-size: 16px;
   }
 }
-@media (width < 1300px) {
+@media (width < 1400px) {
+  .bc-hero__slide .offices__more {
+    font-size: 16px;
+    padding: 10px 20px;
+    width: auto;
+  }
+  .bc-hero__slide .offices__more img {
+    width: 14px;
+    height: 14px;
+  }
+  .bc-hero__slide .office-info__related-tel {
+    font-size: 16px;
+  }
+  .bc-hero__slide .office-info__related-btns {
+    min-width: unset;
+    gap: 10px;
+  }
   .bc-hero__slide .offices__tab {
     font-size: 16px;
     padding: 10px 20px;
@@ -6209,6 +6303,32 @@ NEW BC PAGE
     font-size: 14px;
   }
 }
+@media (width < 1300px) {
+  .bc-hero__slide .office-info__related-btn {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+  .bc-hero__slide .office-info__related-info {
+    font-size: 14px;
+  }
+  .bc-hero__slide .office-info__related-tel {
+    font-size: 14px;
+  }
+  .bc-hero__slide .office-info__related-office {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #fff;
+  }
+  .bc-hero__slide .office-info__related-info {
+    color: #16191a;
+  }
+  .bc-hero__slide .office-info__related-name {
+    color: #4d73fc;
+  }
+  .bc-hero__slide .office-info__related-tel {
+    color: #4d73fc;
+  }
+}
 @media (width < 1200px) {
   .bc-hero__slide {
     height: auto;
@@ -6226,6 +6346,25 @@ NEW BC PAGE
   .bc-hero__slide:nth-child(3), .bc-hero__slide:nth-child(5) {
     background: #fff;
   }
+  .bc-hero__slide .bc-hero__slide-subtitle {
+    margin-inline: auto;
+  }
+  .bc-hero__slide .office-info__related-btns {
+    justify-content: center;
+    flex-direction: column;
+  }
+  .bc-hero__slide .office-info__related-btn {
+    width: 157px;
+  }
+  .bc-hero__slide .office-info__related-info {
+    width: 100%;
+    font-size: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .bc-hero__slide .office-info__related-tel {
+    font-size: 18px;
+  }
   .bc-hero__slide .bc-hero__slide-info-card {
     flex-direction: column;
   }
@@ -6237,6 +6376,7 @@ NEW BC PAGE
     background: none;
     border-radius: 0;
     box-shadow: none;
+    color: #16191a;
   }
   .bc-hero__slide .description__aside {
     margin-top: 0;
@@ -6249,6 +6389,34 @@ NEW BC PAGE
   .bc-hero__slide .bc-hero__slide-subtitle {
     text-align: center;
   }
+  .bc-hero__slide .description__characteristic {
+    color: #16191a;
+    background: rgba(77, 115, 252, 0.05);
+  }
+  .bc-hero__slide .description__characteristic span {
+    color: #7a7f85;
+  }
+  .bc-hero__slide .description__address img {
+    filter: none;
+  }
+  .bc-hero__slide .reviews__body {
+    color: #16191a;
+  }
+  .bc-hero__slide .reviews__slider {
+    background: #ececf2;
+  }
+  .bc-hero__slide .reviews__slide {
+    background: #ececf2;
+  }
+  .bc-hero__slide .reviews__slide-role {
+    color: #7a7f85;
+  }
+  .bc-hero__slide .description__aside-cover {
+    background: rgba(77, 115, 252, 0.2);
+  }
+  .bc-hero__slide .description__orient-label {
+    background: rgba(77, 115, 252, 0.1);
+  }
 }
 @media (width < 767px) {
   .bc-hero__slide {
@@ -6260,17 +6428,73 @@ NEW BC PAGE
     width: 100%;
     padding-inline: 0;
   }
+  .bc-hero__slide .hidden-text__wrapper {
+    overflow: hidden;
+  }
+  .bc-hero__slide .offices__tab {
+    flex: 1;
+    border-radius: 12px;
+  }
+  .bc-hero__slide .office-info__related-office {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.04), -6px -3px 14px 0px rgba(0, 0, 0, 0.04), 23px 12px 26px 0px rgba(0, 0, 0, 0.03);
+    border-radius: 20px;
+    padding: 20px 24px 16px 24px;
+  }
+  .bc-hero__slide .office-info__related-office:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  .bc-hero__slide .office-info__related-info {
+    gap: 15px 10px;
+  }
+  .bc-hero__slide .office-info__related-offices-more {
+    display: block;
+    margin-top: 20px;
+  }
+  .bc-hero__slide .office-info__related-offices-more .btn {
+    width: 100%;
+  }
+  .bc-hero__slide .office-info__related-btns {
+    flex-direction: row;
+  }
   .bc-hero__slide .offices__controls {
     padding-inline: 0;
   }
   .bc-hero__slide .offices__items {
     padding: 0;
   }
+  .bc-hero__slide .offices__more {
+    display: none;
+  }
+  .bc-hero__slide .offices__tabs {
+    flex-direction: row;
+  }
+  .bc-hero__slide .offices__tab {
+    background: rgba(77, 115, 252, 0.05);
+  }
+  .bc-hero__slide .offices__tab span {
+    background: rgba(77, 115, 252, 0.1);
+  }
   .bc-hero__slide .office-info__related-top {
     padding: 16px;
   }
   .bc-hero__slide .office-info__related-name {
+    grid-column: span 1;
     font-size: 18px;
+  }
+  .bc-hero__slide .office-info__related-socials {
+    display: none;
+  }
+  .bc-hero__slide .office-info__related-tel {
+    color: #2cb742;
+    font-size: 16px;
+  }
+  .bc-hero__slide .office-info__related-floor {
+    color: #4d73fc;
+    font-size: 18px;
+    font-weight: 600;
   }
   .bc-hero__slide .office-info__related-price {
     font-size: 16px;
@@ -6299,6 +6523,24 @@ NEW BC PAGE
   }
   .bc-hero__slide .description__aside-content {
     min-height: 310px;
+  }
+}
+@media (width < 399px) {
+  .bc-hero__slide .office-info__related-office {
+    padding: 16px;
+  }
+  .bc-hero__slide .office-info__related-btn {
+    width: auto;
+    flex: 1;
+  }
+  .bc-hero__slide .office-info__related-tel {
+    font-size: 14px;
+  }
+  .bc-hero__slide .offices__tab {
+    font-size: 14px;
+  }
+  .bc-hero__slide .reviews__body {
+    padding: 20px 16px;
   }
 }
 .bc-hero__slide-image {
@@ -6594,4 +6836,9 @@ NEW BC PAGE
 }
 body:has(.bc-hero) footer {
   display: none;
+}
+@media (width < 1200px) {
+  body:has(.bc-hero) footer {
+    display: block;
+  }
 }
