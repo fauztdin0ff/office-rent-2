@@ -478,7 +478,6 @@ if (reviewsSlider) {
       slidesPerView: 1,
       loop: true,
       spaceBetween: 0,
-      effect: 'fade',
       navigation: {
          nextEl: '.reviews__next',
          prevEl: '.reviews__prev',
@@ -989,7 +988,6 @@ function updateBcSwiper() {
 
    if (window.innerWidth >= 1200) {
       if (!bcSwiper) {
-         // Добавляем классы swiper, если их нет
          bcContainer.classList.add('swiper');
          bcWrapper.classList.add('swiper-wrapper');
          bcSlides.forEach(slide => slide.classList.add('swiper-slide'));
@@ -1000,7 +998,14 @@ function updateBcSwiper() {
             slidesPerView: 1,
             watchOverflow: true,
             simulateTouch: true,
-            mousewheel: true,
+            noSwipingClass: '.swiper-no-swiping',
+            mousewheel: {
+               forceToAxis: true,
+               releaseOnEdges: true,
+               sensitivity: 1
+            },
+            allowTouchMove: true,
+            nested: true,
             grabCursor: false,
             slideToClickedSlide: false,
             speed: 1500,
@@ -1028,13 +1033,11 @@ function updateBcSwiper() {
          }
       }
    } else {
-      // Уничтожаем слайдер, если он есть
       if (bcSwiper) {
          bcSwiper.destroy(true, true);
          bcSwiper = null;
       }
 
-      // Убираем классы Swiper **всегда**, даже если слайдера не было
       bcContainer.classList.remove('swiper');
       bcWrapper.classList.remove('swiper-wrapper');
       bcSlides.forEach(slide => {
@@ -1046,14 +1049,30 @@ function updateBcSwiper() {
          );
       });
 
-      // Чистим кастомную пагинацию
       if (paginationElement) paginationElement.innerHTML = '';
    }
 }
 
-// При загрузке и при ресайзе
 window.addEventListener('load', updateBcSwiper);
 window.addEventListener('resize', updateBcSwiper);
+
+function bindInnerScroll(swiper) {
+   const scrollBlocks = document.querySelectorAll('.office-info__related-offices');
+
+   scrollBlocks.forEach(block => {
+      block.addEventListener('mouseenter', () => {
+         if (swiper.mousewheel) {
+            swiper.mousewheel.disable();
+         }
+      });
+
+      block.addEventListener('mouseleave', () => {
+         if (swiper.mousewheel) {
+            swiper.mousewheel.enable();
+         }
+      });
+   });
+}
 
 })();
 
