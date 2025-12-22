@@ -1218,6 +1218,16 @@ h2 {
     color: #16191a;
   }
 }
+.btn.-outline {
+  background: transparent;
+  box-shadow: none;
+  border: 2px solid #fff;
+}
+@media (hover: hover) {
+  .btn.-outline:hover {
+    background: #fff;
+  }
+}
 
 .slider-btns {
   display: flex;
@@ -5792,6 +5802,21 @@ NEW BC PAGE
   width: 100%;
   height: 100%;
 }
+.bc-hero__slide-buttons {
+  display: flex;
+  gap: 24px;
+}
+.bc-hero__slide-buttons .btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  box-shadow: none;
+}
+@media (hover: hover) {
+  .bc-hero__slide-buttons .btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+  }
+}
 .bc-hero__slide {
   width: 100%;
   height: 100%;
@@ -5864,6 +5889,10 @@ NEW BC PAGE
 }
 .bc-hero__slide .offices__tab span {
   background: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
 }
 .bc-hero__slide .offices__tab.active {
   background: #4d73fc;
@@ -5892,19 +5921,30 @@ NEW BC PAGE
   padding: 14px 40px;
   transition: all 0.3s ease;
 }
-.bc-hero__slide .office-info__related-office:has(.office-info__related-name:hover) {
-  background-color: rgba(255, 255, 255, 0.5);
+@media (hover: hover) {
+  .bc-hero__slide .office-info__related-office:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  .bc-hero__slide .office-info__related-office:hover .office-info__related-label {
+    color: #fff;
+  }
 }
-.bc-hero__slide .office-info__related-office:has(.office-info__related-name:hover) .office-info__related-label {
-  color: #fff;
-}
-@media (width < 1200px) {
-  .bc-hero__slide .office-info__related-office:has(.office-info__related-name:hover) .office-info__related-label {
+@media (hover: hover) and (width < 1200px) {
+  .bc-hero__slide .office-info__related-office:hover .office-info__related-label {
     color: #7a7f85;
   }
 }
 .bc-hero__slide .office-info__related-office:not(:last-child) {
   margin-bottom: 5px;
+}
+.bc-hero__slide .office-info__related-office.element-animation {
+  transform: translateY(-20%);
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out 0.1s, background-color 0.4s ease;
+}
+.bc-hero__slide .office-info__related-office.element-animation.element-show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .bc-hero__slide .office-info__related-btns {
   display: flex;
@@ -5978,23 +6018,14 @@ NEW BC PAGE
 .bc-hero__slide .office-info__related-name {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   color: #fff;
   font-size: 20px;
   font-weight: 600;
   white-space: nowrap;
   flex: 0 0 20%;
   position: static;
-  min-width: 167px;
-}
-.bc-hero__slide .office-info__related-name::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  inset: 0;
-  z-index: 3;
+  min-width: 267px;
 }
 @media (hover: hover) {
   .bc-hero__slide .office-info__related-name:hover {
@@ -6089,6 +6120,7 @@ NEW BC PAGE
   color: #fff;
 }
 .bc-hero__slide .description__head {
+  align-items: flex-start;
   margin-bottom: 24px;
 }
 .bc-hero__slide .office__gallery {
@@ -6151,6 +6183,13 @@ NEW BC PAGE
   .bc-hero__slide .office-info__related-info {
     font-size: 16px;
   }
+  .bc-hero__slide .rating-label {
+    font-size: 14px;
+  }
+  .bc-hero__slide .description__rating-stars img {
+    width: 20px;
+    height: 20px;
+  }
   .bc-hero__slide .offices__panel {
     margin-bottom: 20px;
   }
@@ -6170,6 +6209,7 @@ NEW BC PAGE
   }
   .bc-hero__slide .office-info__related-name {
     font-size: 16px;
+    min-width: 167px;
   }
   .bc-hero__slide .office-info__related-price {
     font-size: 16px;
@@ -6190,9 +6230,6 @@ NEW BC PAGE
   .bc-hero__slide .description__title {
     font-size: 26px;
   }
-  .bc-hero__slide .rating-label {
-    display: none;
-  }
   .bc-hero__slide .achievement__body {
     padding: 36px;
   }
@@ -6200,9 +6237,6 @@ NEW BC PAGE
     height: 488px;
   }
   .bc-hero__slide .description__rating {
-    display: flex;
-    align-items: center;
-    gap: 6px;
     white-space: nowrap;
   }
   .bc-hero__slide .description__address {
@@ -6257,13 +6291,14 @@ NEW BC PAGE
     gap: 10px;
   }
   .bc-hero__slide .offices__tab {
-    font-size: 16px;
+    font-size: 20px;
     padding: 10px 20px;
   }
   .bc-hero__slide .offices__tab span {
-    width: 20px;
-    height: 20px;
-    flex: 0 0 20px;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    font-weight: 600;
   }
   .bc-hero__slide .office-info__related-name {
     font-size: 16px;
@@ -6364,6 +6399,12 @@ NEW BC PAGE
     height: auto;
     padding: 64px 0;
   }
+  .bc-hero__slide:nth-child(3) {
+    border-radius: 20px;
+  }
+  .bc-hero__slide:nth-child(5) {
+    border-radius: 20px;
+  }
   .bc-hero__slide:first-child {
     min-height: 100vh;
   }
@@ -6375,6 +6416,13 @@ NEW BC PAGE
   }
   .bc-hero__slide:nth-child(3), .bc-hero__slide:nth-child(5) {
     background: #fff;
+  }
+  .bc-hero__slide .office-info__related-image {
+    display: none;
+  }
+  .bc-hero__slide .bc-hero__slide-buttons {
+    justify-content: center;
+    width: 100%;
   }
   .bc-hero__slide .bc-hero__slide-subtitle {
     margin-inline: auto;
@@ -6453,7 +6501,7 @@ NEW BC PAGE
 }
 @media (width < 767px) {
   .bc-hero__slide {
-    padding: 48px 0;
+    padding: 40px 0;
   }
   .bc-hero__slide .offices__tabs {
     flex-direction: column;
@@ -6462,8 +6510,11 @@ NEW BC PAGE
     padding-inline: 0;
   }
   .bc-hero__slide .description__rating {
-    display: flex;
+    display: block;
     order: -1;
+  }
+  .bc-hero__slide .rating-label {
+    display: inline;
   }
   .bc-hero__slide .description__rating-stars {
     margin-top: 0;
@@ -6502,6 +6553,7 @@ NEW BC PAGE
   }
   .bc-hero__slide .office-info__related-btns {
     flex-direction: row;
+    justify-content: space-between;
   }
   .bc-hero__slide .offices__controls {
     padding-inline: 0;
@@ -6526,7 +6578,7 @@ NEW BC PAGE
   }
   .bc-hero__slide .office-info__related-name {
     grid-column: span 1;
-    font-size: 18px;
+    font-size: 20px;
   }
   .bc-hero__slide .office-info__related-socials {
     display: none;
@@ -6537,11 +6589,19 @@ NEW BC PAGE
   }
   .bc-hero__slide .office-info__related-floor {
     color: #4d73fc;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
   }
   .bc-hero__slide .office-info__related-price {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .bc-hero__slide .office-info__related-label {
+    font-weight: 400;
+  }
+  .bc-hero__slide .office-info__related-layout {
+    font-size: 18px;
   }
   .bc-hero__slide .reviews__body {
     padding: 24px;
@@ -6581,7 +6641,7 @@ NEW BC PAGE
     font-size: 14px;
   }
   .bc-hero__slide .offices__tab {
-    font-size: 14px;
+    font-size: 18px;
   }
   .bc-hero__slide .reviews__body {
     padding: 20px 16px;
