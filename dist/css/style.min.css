@@ -6517,6 +6517,13 @@ NEW BC PAGE
     display: block;
     order: -1;
   }
+  .bc-hero__slide .reviews__slider {
+    background: none;
+  }
+  .bc-hero__slide .reviews__slide {
+    padding: 0;
+    background: none;
+  }
   .bc-hero__slide .rating-label {
     display: inline;
   }
@@ -6640,7 +6647,7 @@ NEW BC PAGE
   }
   .bc-hero__slide .office-info__related-btn {
     width: auto;
-    flex: 1;
+    flex: 0 1 50%;
   }
   .bc-hero__slide .office-info__related-tel {
     font-size: 14px;
