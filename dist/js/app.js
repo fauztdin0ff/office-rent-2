@@ -1021,6 +1021,14 @@ function updateBcSwiper() {
                   return paginationHtml;
                },
             },
+            on: {
+               init(swiper) {
+                  updateActiveSlideLink(swiper);
+               },
+               slideChange(swiper) {
+                  updateActiveSlideLink(swiper);
+               }
+            }
          });
 
          if (paginationElement) {
@@ -1031,6 +1039,7 @@ function updateBcSwiper() {
                }
             });
          }
+
       }
    } else {
       if (bcSwiper) {
@@ -1056,6 +1065,20 @@ function updateBcSwiper() {
 window.addEventListener('load', updateBcSwiper);
 window.addEventListener('resize', updateBcSwiper);
 
+function updateActiveSlideLink(swiper) {
+   const links = document.querySelectorAll('.js-slide-link');
+
+   links.forEach(link => link.classList.remove('active'));
+
+   const activeIndex = swiper.activeIndex;
+   const activeLink = document.querySelector(
+      `.js-slide-link[data-slide="${activeIndex}"]`
+   );
+
+   if (activeLink) {
+      activeLink.classList.add('active');
+   }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
    document.querySelectorAll('.js-slide-link').forEach(link => {

@@ -779,6 +779,29 @@ header sec
     display: none;
   }
 }
+@media (width < 767px) {
+  .header-sec.blur {
+    position: fixed;
+    box-shadow: none !important;
+  }
+  .header-sec.blur .header__body {
+    background: #fff !important;
+    color: #16191a;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.04), -6px -3px 14px 0px rgba(0, 0, 0, 0.04), 23px 12px 26px 0px rgba(0, 0, 0, 0.03), 53px 27px 35px 0px rgba(0, 0, 0, 0.02), 94px 48px 42px 0px rgba(0, 0, 0, 0.01);
+  }
+  .header-sec.blur .header__logo {
+    filter: invert(0.7);
+    display: none;
+  }
+  .header-sec.blur .header__more {
+    justify-content: space-between;
+  }
+  .header-sec.blur .header__tel a {
+    color: #4d73fc;
+    font-size: 18px;
+    padding-left: 15px;
+  }
+}
 
 /*==========================================================================
 Footer
@@ -6013,7 +6036,7 @@ NEW BC PAGE
   overflow-y: auto;
 }
 .bc-hero__slide .offices__wrapper {
-  min-height: 300px;
+  min-height: 560px;
 }
 .bc-hero__slide .offices__controls {
   padding-inline: 36px;
@@ -6118,7 +6141,13 @@ NEW BC PAGE
 .bc-hero__slide .description__characteristic span {
   color: #ccc;
 }
+.bc-hero__slide .description__rating-stars {
+  margin-top: 5px;
+}
 @media (width < 1700px) {
+  .bc-hero__slide .offices__wrapper {
+    min-height: 460px;
+  }
   .bc-hero__slide .office-info__related-info {
     font-size: 16px;
   }
@@ -6350,6 +6379,9 @@ NEW BC PAGE
   .bc-hero__slide .bc-hero__slide-subtitle {
     margin-inline: auto;
   }
+  .bc-hero__slide .offices__wrapper {
+    min-height: unset;
+  }
   .bc-hero__slide .office-info__related-btns {
     justify-content: center;
     flex-direction: column;
@@ -6428,6 +6460,13 @@ NEW BC PAGE
     align-items: stretch;
     width: 100%;
     padding-inline: 0;
+  }
+  .bc-hero__slide .description__rating {
+    display: flex;
+    order: -1;
+  }
+  .bc-hero__slide .description__rating-stars {
+    margin-top: 0;
   }
   .bc-hero__slide .hidden-text__wrapper {
     overflow: hidden;
@@ -6824,6 +6863,10 @@ NEW BC PAGE
     fill: #fff;
     color: #fff;
   }
+}
+
+.js-slide-link.active {
+  color: #4d73fc !important;
 }
 
 @keyframes draw {
