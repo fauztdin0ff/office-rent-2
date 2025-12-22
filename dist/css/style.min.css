@@ -5806,15 +5806,12 @@ NEW BC PAGE
   display: flex;
   gap: 24px;
 }
-.bc-hero__slide-buttons .btn {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-  box-shadow: none;
+.bc-hero__slide-buttons .btn.-outline {
+  background: none;
 }
 @media (hover: hover) {
-  .bc-hero__slide-buttons .btn:hover {
-    background: rgba(0, 0, 0, 0.2);
-    color: #fff;
+  .bc-hero__slide-buttons .btn.-outline:hover {
+    background: #fff;
   }
 }
 .bc-hero__slide {
@@ -6579,6 +6576,7 @@ NEW BC PAGE
   .bc-hero__slide .office-info__related-name {
     grid-column: span 1;
     font-size: 20px;
+    min-width: unset;
   }
   .bc-hero__slide .office-info__related-socials {
     display: none;
