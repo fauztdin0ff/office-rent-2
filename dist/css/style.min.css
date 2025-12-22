@@ -145,6 +145,7 @@ Settings
 html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
+  scroll-padding-top: 40px;
 }
 
 body {
@@ -155,7 +156,6 @@ body {
   font-size: 16px;
   background: #ececf2;
   overflow-x: hidden;
-  scroll-padding-top: 60px;
 }
 body::after {
   content: "";
@@ -784,6 +784,7 @@ header sec
   .header-sec.blur {
     position: fixed;
     box-shadow: none !important;
+    padding-top: 10px;
   }
   .header-sec.blur .header__body {
     color: #16191a;
@@ -5807,6 +5808,12 @@ NEW BC PAGE
   display: flex;
   gap: 24px;
 }
+@media (hover: hover) {
+  .bc-hero__slide-buttons .btn:hover {
+    background: #fc9c4d;
+    box-shadow: none;
+  }
+}
 .bc-hero__slide-buttons .btn.-outline {
   background: none;
 }
@@ -6025,11 +6032,6 @@ NEW BC PAGE
   position: static;
   min-width: 267px;
 }
-@media (hover: hover) {
-  .bc-hero__slide .office-info__related-name:hover {
-    color: #4d73fc;
-  }
-}
 .bc-hero__slide .office-info__related-label {
   display: block;
   font-size: 0.7em;
@@ -6193,6 +6195,8 @@ NEW BC PAGE
   }
   .bc-hero__slide .offices__more {
     font-size: 16px;
+    padding: 14px 36px;
+    border-radius: 10px;
   }
   .bc-hero__slide .bc-hero__slide-subtitle {
     font-size: 16px;
@@ -6201,13 +6205,13 @@ NEW BC PAGE
     padding-inline: 24px;
   }
   .bc-hero__slide .office-info__related-image {
-    flex: 0 1 90px;
+    flex: 0 0 90px;
     max-width: 90px;
     height: 60px;
   }
   .bc-hero__slide .office-info__related-name {
     font-size: 16px;
-    min-width: 167px;
+    min-width: 200px;
   }
   .bc-hero__slide .office-info__related-price {
     font-size: 16px;
@@ -6217,6 +6221,8 @@ NEW BC PAGE
   }
   .bc-hero__slide .offices__tab {
     font-size: 18px;
+    padding: 14px 36px;
+    border-radius: 10px;
   }
   .bc-hero__slide .description__head {
     margin-bottom: 20px;
