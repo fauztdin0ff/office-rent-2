@@ -5811,6 +5811,7 @@ NEW BC PAGE
 @media (hover: hover) {
   .bc-hero__slide-buttons .btn:hover {
     background: #fc9c4d;
+    color: #fff;
     box-shadow: none;
   }
 }
@@ -5820,6 +5821,7 @@ NEW BC PAGE
 @media (hover: hover) {
   .bc-hero__slide-buttons .btn.-outline:hover {
     background: #fff;
+    color: #16191a;
   }
 }
 .bc-hero__slide {
@@ -6519,6 +6521,9 @@ NEW BC PAGE
   }
   .bc-hero__slide .reviews__slider {
     background: none;
+  }
+  .bc-hero__slide .reviews__buttons {
+    top: 15px !important;
   }
   .bc-hero__slide .reviews__slide {
     padding: 0;
