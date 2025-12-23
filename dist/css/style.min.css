@@ -6598,6 +6598,8 @@ NEW BC PAGE
   }
   .bc-hero__slide .office-info__related-offices-more .btn {
     width: 100%;
+    font-size: 16px;
+    padding: 14px;
   }
   .bc-hero__slide .office-info__related-btns {
     flex-direction: row;
