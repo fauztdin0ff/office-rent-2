@@ -5910,7 +5910,7 @@ NEW BC PAGE
 }
 @media (hover: hover) {
   .bc-hero__slide .offices__more:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: #4d73fc;
   }
 }
 .bc-hero__slide .offices__tabs {
