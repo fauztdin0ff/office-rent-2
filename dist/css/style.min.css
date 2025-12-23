@@ -5845,9 +5845,6 @@ NEW BC PAGE
   background: linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(40, 40, 52, 0.4) 100%), linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(40, 40, 52, 0.2) 100%);
   z-index: 1;
 }
-.bc-hero__slide:first-child::after {
-  background: linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(40, 40, 52, 0.7) 100%), linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(40, 40, 52, 0.5) 100%);
-}
 .bc-hero__slide.swiper-slide-active text {
   animation: draw 100s linear forwards;
 }
