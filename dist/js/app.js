@@ -117,14 +117,27 @@ function popups() {
    document.addEventListener("DOMContentLoaded", () => {
       const openButtons = document.querySelectorAll(".open-popup");
 
+      function closeActivePopup() {
+         const activePopup = document.querySelector(".popup.show");
+         if (activePopup) {
+            activePopup.classList.remove("show");
+         }
+      }
+
       openButtons.forEach((button) => {
-         button.addEventListener("click", function () {
+         button.addEventListener("click", function (e) {
+            e.preventDefault();
+
             const popupId = this.dataset.popup;
             const popup = document.getElementById(popupId);
-            if (popup) {
-               popup.classList.add("show");
-               document.body.style.overflow = "hidden";
-            }
+            if (!popup) return;
+
+            // закрываем текущий попап
+            closeActivePopup();
+
+            // открываем новый
+            popup.classList.add("show");
+            document.body.style.overflow = "hidden";
          });
       });
 
@@ -1095,6 +1108,42 @@ document.addEventListener('DOMContentLoaded', () => {
    });
 });
 
+
+/*==========================================================================
+Office tabs in bc page
+============================================================================*/
+document.addEventListener('DOMContentLoaded', () => {
+   const officesPopup = document.querySelector('.offices-popup');
+   const tabs = officesPopup.querySelectorAll('.offices-popup__tab');
+   const items = officesPopup.querySelectorAll('.offices-popup__items');
+   const loader = officesPopup.querySelector('.loading-icon');
+
+   if (!tabs.length || !items.length || !loader) return;
+
+   tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+         const target = tab.dataset.offices;
+
+         if (tab.classList.contains('active')) return;
+
+         tabs.forEach(t => t.classList.remove('active'));
+         tab.classList.add('active');
+
+         loader.classList.add('active');
+
+         items.forEach(item => item.classList.remove('active'));
+
+         setTimeout(() => {
+            loader.classList.remove('active');
+
+            const targetItem = document.querySelector(`.offices-popup__items[data-offices="${target}"]`);
+            if (targetItem) {
+               targetItem.classList.add('active');
+            }
+         }, 600);
+      });
+   });
+});
 })();
 
 /******/ })()
