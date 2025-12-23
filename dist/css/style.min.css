@@ -6263,7 +6263,10 @@ NEW BC PAGE
   .bc-hero__slide .offices__tab {
     font-size: 18px;
     padding: 14px 36px;
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
+  }
+  .bc-hero__slide .offices__tab:nth-child(2) {
+    border-radius: 0 10px 10px 0;
   }
   .bc-hero__slide .description__head {
     margin-bottom: 20px;
@@ -6581,6 +6584,10 @@ NEW BC PAGE
   .bc-hero__slide .offices__tab {
     flex: 1;
     border-radius: 12px;
+    border-radius: 12px 0 0 12px;
+  }
+  .bc-hero__slide .offices__tab:nth-child(2) {
+    border-radius: 0 12px 12px 0;
   }
   .bc-hero__slide .office-info__related-office {
     flex-direction: column;
@@ -6627,6 +6634,7 @@ NEW BC PAGE
   }
   .bc-hero__slide .offices__tab {
     background: rgba(77, 115, 252, 0.05);
+    color: #7a7f85;
   }
   .bc-hero__slide .offices__tab span {
     background: rgba(77, 115, 252, 0.1);
