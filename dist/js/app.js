@@ -1055,6 +1055,10 @@ function updateBcSwiper() {
             grabCursor: false,
             slideToClickedSlide: false,
             speed: 1500,
+            keyboard: {
+               enabled: true,
+               onlyInViewport: true,
+            },
             pagination: {
                el: '.bc-hero__fraction',
                type: 'custom',
