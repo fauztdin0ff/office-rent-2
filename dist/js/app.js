@@ -1231,7 +1231,7 @@ Fancybox.bind('[data-fancybox]', {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-   const openBtn = document.querySelector('.js-open-offices-gallery');
+   const openBtn = document.getElementById('js-open-offices-gallery');
    if (!openBtn) return;
 
    openBtn.addEventListener('click', () => {
@@ -1241,7 +1241,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'image',
          })),
          {
-            startIndex: 0, // с какого изображения открывать
+            startIndex: 0,
          }
       );
    });
