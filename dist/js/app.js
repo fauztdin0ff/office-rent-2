@@ -298,23 +298,24 @@ document.addEventListener("DOMContentLoaded", () => {
 /*==========================================================================
 Header fix
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", () => {
-   const header = document.querySelector("header");
-
+document.addEventListener('DOMContentLoaded', function () {
+   const header = document.querySelector('header');
    if (!header) return;
 
-   const toggleHeader = () => {
-      if (window.scrollY > 40) {
-         header.classList.add("fx");
+   const toggleHeaderClass = () => {
+      if (window.scrollY > 0) {
+         header.classList.add('fx');
       } else {
-         header.classList.remove("fx");
+         header.classList.remove('fx');
       }
    };
 
-   window.addEventListener("scroll", toggleHeader);
-   toggleHeader();
-});
+   // Проверка при загрузке страницы
+   toggleHeaderClass();
 
+   // Проверка при скролле
+   window.addEventListener('scroll', toggleHeaderClass);
+});
 
 /*==========================================================================
 Observer Animation
@@ -1261,7 +1262,7 @@ ymaps.ready(function () {
       searchControlProvider: 'yandex#search'
    });
 
-   var iconImageSize = window.innerWidth < 768 ? [85, 100] : [113, 133];
+   var iconImageSize = window.innerWidth < 768 ? [60, 80] : [90, 100];
    var iconImageOffset = window.innerWidth < 768 ? [-42.5, -100] : [-67, -130];
 
    var MyIconContentLayout = ymaps.templateLayoutFactory.createClass(

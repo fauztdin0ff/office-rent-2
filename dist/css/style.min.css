@@ -225,6 +225,12 @@ Header
 .header.fx {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.04), -6px -3px 14px 0px rgba(0, 0, 0, 0.04), 23px 12px 26px 0px rgba(0, 0, 0, 0.03), 53px 27px 35px 0px rgba(0, 0, 0, 0.02), 94px 48px 42px 0px rgba(0, 0, 0, 0.01);
 }
+.header.fx .header__body {
+  padding: 0;
+}
+.header.fx .header__logo img {
+  transform: scale(0.7);
+}
 .header.absolute {
   background: transparent;
   position: fixed;
@@ -1231,6 +1237,10 @@ h2 {
   }
 }
 
+.btn.-blue {
+  white-space: nowrap;
+}
+
 .slider-btns {
   display: flex;
   align-items: center;
@@ -1871,7 +1881,7 @@ Filters
 .filters__form-label {
   display: block;
   color: #16191a;
-  font-size: clamp(16px, 1.1vw, 20px);
+  font-size: clamp(14px, 1.1vw, 20px);
   font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.32px;
@@ -2246,7 +2256,7 @@ Popular
     align-items: stretch;
   }
 }
-.popular__image {
+.popular__map {
   flex: 0 1 50%;
   position: relative;
   border-radius: 10px;
@@ -2258,7 +2268,7 @@ Popular
   justify-content: space-between;
   padding: 40px;
 }
-.popular__image::after {
+.popular__map::after {
   display: block;
   position: absolute;
   top: 0;
@@ -2267,7 +2277,32 @@ Popular
   background: rgba(77, 115, 252, 0.4196078431);
   z-index: 1;
 }
-.popular__image img {
+.popular__map.element-animation {
+  transition-timing-function: ease-in-out;
+  transition-delay: 0.1s;
+  transition-duration: 0.8s;
+  transform: translateX(-20%);
+  opacity: 0;
+}
+.popular__map.element-animation.element-show {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (width < 980px) {
+  .popular__map {
+    width: 58.33333333%;
+    margin-inline: auto;
+  }
+}
+@media (width < 767px) {
+  .popular__map {
+    padding: 24px;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 300px;
+  }
+}
+.popular__map-frame {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2276,31 +2311,6 @@ Popular
   left: 0;
   width: 100%;
   height: 100%;
-}
-.popular__image.element-animation {
-  transition-timing-function: ease-in-out;
-  transition-delay: 0.1s;
-  transition-duration: 0.8s;
-  transform: translateX(-20%);
-  opacity: 0;
-}
-.popular__image.element-animation.element-show {
-  opacity: 1;
-  transform: translateX(0);
-}
-@media (width < 980px) {
-  .popular__image {
-    width: 58.33333333%;
-    margin-inline: auto;
-  }
-}
-@media (width < 767px) {
-  .popular__image {
-    padding: 24px;
-    flex: 1 1 auto;
-    width: 100%;
-    height: 300px;
-  }
 }
 .popular__image-label {
   padding: 16px 32px;
@@ -2633,6 +2643,11 @@ Reviews
   display: flex;
   flex-direction: column;
 }
+@media (width < 767px) {
+  .reviews__slide {
+    padding: 20px;
+  }
+}
 .reviews__slide-photos {
   display: flex;
   margin-bottom: 30px;
@@ -2648,6 +2663,11 @@ Reviews
 }
 .reviews__slide-photos img:not(:first-child) {
   margin-left: -28px;
+}
+@media (width < 399px) {
+  .reviews__slide-photos img:not(:first-child) {
+    display: none;
+  }
 }
 .reviews__slide-text {
   margin-bottom: 30px;
@@ -2679,9 +2699,9 @@ Reviews
   gap: 10px;
   z-index: 100;
 }
-@media (width < 399px) {
+@media (width < 767px) {
   .reviews__buttons {
-    display: none;
+    top: 44px;
   }
 }
 .reviews__prev, .reviews__next {
@@ -2701,6 +2721,11 @@ Reviews
 @media (hover: hover) {
   .reviews__prev:hover, .reviews__next:hover {
     color: #4d73fc;
+  }
+}
+@media (width < 767px) {
+  .reviews__prev, .reviews__next {
+    background: none;
   }
 }
 
@@ -4316,13 +4341,12 @@ Descr
   position: relative;
   overflow: hidden;
 }
-.description__aside-map img {
+.description__aside-frame {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 .description__aside-cover {
   padding: 16px 32px;
@@ -5766,19 +5790,17 @@ Office info
   border-radius: 10px;
   overflow: hidden;
 }
-.office-info__map-frame img {
+@media (width < 767px) {
+  .office-info__map-frame {
+    height: 240px;
+  }
+}
+.office-info__map-frame-a {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
-@media (width < 767px) {
-  .office-info__map-frame {
-    height: 240px;
-  }
 }
 
 /*==========================================================================
@@ -7759,14 +7781,14 @@ Contacts
   }
 }
 
-#map {
+.contacts-map__frame {
   height: auto;
   aspect-ratio: 19/6;
   border-radius: 20px;
   overflow: hidden;
 }
 @media (width < 767px) {
-  #map {
+  .contacts-map__frame {
     aspect-ratio: 4/3;
   }
 }
