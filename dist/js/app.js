@@ -243,104 +243,92 @@ _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.phoneMask();
 /*==========================================================================
 Submenu
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", () => {
-   const items = document.querySelectorAll(".menu__item--has-submenu");
+function initSubmenu() {
+   const items = document.querySelectorAll('.menu__item--has-submenu');
+   if (!items.length) return;
 
    items.forEach(item => {
-      item.addEventListener("click", (e) => {
-         // если кликнули по ссылке внутри сабменю — ничего не делаем
-         if (e.target.closest(".submenu a")) return;
+      item.addEventListener('click', (e) => {
+         if (e.target.closest('.submenu a')) return;
 
          e.preventDefault();
 
          items.forEach(i => {
-            if (i !== item) i.classList.remove("open");
+            if (i !== item) i.classList.remove('open');
          });
 
-         item.classList.toggle("open");
+         item.classList.toggle('open');
       });
    });
 
-   document.addEventListener("click", (e) => {
-      if (!e.target.closest(".menu__item--has-submenu")) {
-         items.forEach(item => item.classList.remove("open"));
+   document.addEventListener('click', (e) => {
+      if (!e.target.closest('.menu__item--has-submenu')) {
+         items.forEach(item => item.classList.remove('open'));
       }
    });
-});
+}
+
 
 
 /*==========================================================================
 Preloader
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", () => {
-   const preloader = document.querySelector(".preloader");
-
+function initPreloader() {
+   const preloader = document.querySelector('.preloader');
    if (!preloader) return;
 
    const MIN_TIME = 1000;
    const startTime = Date.now();
 
-   window.addEventListener("load", () => {
+   window.addEventListener('load', () => {
       const timePassed = Date.now() - startTime;
       const delay = Math.max(0, MIN_TIME - timePassed);
 
       setTimeout(() => {
-         preloader.classList.add("hidden");
+         preloader.classList.add('hidden');
 
          setTimeout(() => {
             preloader.remove();
          }, 1200);
       }, delay);
    });
-});
+}
 
 
 /*==========================================================================
 Header fix
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', function () {
+function initHeaderFix() {
    const header = document.querySelector('header');
    if (!header) return;
 
    const toggleHeaderClass = () => {
-      if (window.scrollY > 0) {
-         header.classList.add('fx');
-      } else {
-         header.classList.remove('fx');
-      }
+      header.classList.toggle('fx', window.scrollY > 0);
    };
 
-   // Проверка при загрузке страницы
    toggleHeaderClass();
-
-   // Проверка при скролле
    window.addEventListener('scroll', toggleHeaderClass);
-});
+}
+
 
 /*==========================================================================
 Observer Animation
 ============================================================================*/
-if (document.readyState === "complete") {
-   init();
-} else {
-   window.addEventListener("load", init);
-}
+function initObserverAnimation() {
+   const elements = document.querySelectorAll('.element-animation');
+   if (!elements.length) return;
 
-function init() {
-   function onEntry(entry) {
-      entry.forEach(change => {
-         if (change.isIntersecting) {
-            change.target.classList.add('element-show');
+   const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+         if (entry.isIntersecting) {
+            entry.target.classList.add('element-show');
          }
       });
-   }
+   }, {
+      threshold: 0
+   });
 
-   let options = { threshold: [0.0] };
-   let observer = new IntersectionObserver(onEntry, options);
-   let elements = document.querySelectorAll('.element-animation');
-   for (let elm of elements) {
-      observer.observe(elm);
-   }
+   elements.forEach(el => observer.observe(el));
 }
 
 
@@ -348,19 +336,19 @@ function init() {
 /*==========================================================================
 Move buttons
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", () => {
-   const headerButtons = document.querySelector(".header__callback");
-   const menuBody = document.querySelector(".menu__body");
-   const headerBody = document.querySelector(".header__buttons");
+function initMoveButtons() {
+   const headerButtons = document.querySelector('.header__callback');
+   const menuBody = document.querySelector('.menu__body');
+   const headerBody = document.querySelector('.header__buttons');
 
    if (!headerButtons || !menuBody || !headerBody) return;
 
    const originalParent = headerBody;
    const originalNextSibling = headerButtons.nextElementSibling;
 
-   const mq = window.matchMedia("(max-width: 1200px)");
+   const mq = window.matchMedia('(max-width: 1200px)');
 
-   function handleMove(e) {
+   const handleMove = (e) => {
       if (e.matches) {
          if (headerButtons.parentElement !== menuBody) {
             menuBody.appendChild(headerButtons);
@@ -374,20 +362,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
          }
       }
-   }
+   };
 
    handleMove(mq);
-   mq.addEventListener("change", handleMove);
-});
+   mq.addEventListener('change', handleMove);
+}
+
 
 
 /*==========================================================================
 Related slider
 ============================================================================*/
-const cardsSlider = document.querySelector(".latest__slider");
+function initRelatedSlider() {
+   const cardsSlider = document.querySelector('.latest__slider');
+   if (!cardsSlider || typeof Swiper === 'undefined') return;
 
-if (cardsSlider) {
-   const cardsSwiper = new Swiper(cardsSlider, {
+   new Swiper(cardsSlider, {
       loop: true,
       spaceBetween: 32,
       navigation: {
@@ -395,100 +385,105 @@ if (cardsSlider) {
          prevEl: '.latest__prev',
       },
       breakpoints: {
-         320: {
-            slidesPerView: 1,
-         },
-         650: {
-            slidesPerView: 2,
-         },
-         1100: {
-            slidesPerView: 3,
-         },
-         1600: {
-            slidesPerView: 4,
-         }
+         320: { slidesPerView: 1 },
+         650: { slidesPerView: 2 },
+         1100: { slidesPerView: 3 },
+         1600: { slidesPerView: 4 },
       }
    });
 }
 
+
 /*==========================================================================
 Filter tabs
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', function () {
+function initFilterTabs() {
    const tabs = document.querySelectorAll('.filters__tab');
    const cards = document.querySelectorAll('.filters__card');
 
+   if (!tabs.length || !cards.length) return;
+
    tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-         const tabId = tab.getAttribute('data-tab');
+         const tabId = tab.dataset.tab;
+         if (!tabId) return;
+
          tabs.forEach(t => t.classList.remove('active'));
          tab.classList.add('active');
-         cards.forEach(card => {
-            card.classList.remove('show');
-         });
+
+         cards.forEach(card => card.classList.remove('show'));
+
          const targetCard = document.querySelector(`.filters__card[data-tab="${tabId}"]`);
          if (targetCard) {
             targetCard.classList.add('show');
          }
       });
    });
-});
+}
+
 
 /*==========================================================================
 Swiper in product card  
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', function () {
-   document.querySelectorAll('.card-preview__slider').forEach(function (slider) {
+function initProductCardSwipers() {
+   const sliders = document.querySelectorAll('.card-preview__slider');
+   if (!sliders.length || typeof Swiper === 'undefined') return;
+
+   sliders.forEach(slider => {
+      const container = slider.closest('.card-preview__image');
+      const paginationEl = container?.querySelector('.card-preview__pagination');
+
       const swiperInstance = new Swiper(slider, {
          loop: true,
          nested: true,
-         pagination: {
-            el: slider.closest('.card-preview__image').querySelector('.card-preview__pagination'),
+         pagination: paginationEl ? {
+            el: paginationEl,
             clickable: true,
             type: 'bullets',
             bulletClass: 'swiper-pagination-bullet',
             bulletActiveClass: 'swiper-pagination-bullet-active',
-            renderBullet: function (index, className) {
-               return `<span class="${className}"></span>`;
-            },
-         },
+            renderBullet: (index, className) =>
+               `<span class="${className}"></span>`,
+         } : undefined,
       });
 
-      if (window.innerWidth > 1024) {
-         let lastMouseX = null;
-         let threshold = 20;
-         slider.addEventListener('mousemove', function (event) {
-            if (lastMouseX !== null) {
-               let deltaX = event.clientX - lastMouseX;
-               if (Math.abs(deltaX) > threshold) {
-                  if (deltaX > 0) {
-                     swiperInstance.slideNext();
-                  } else {
-                     swiperInstance.slidePrev();
-                  }
-                  lastMouseX = event.clientX;
-               }
-            } else {
-               lastMouseX = event.clientX;
-            }
-         });
+      if (window.innerWidth <= 1024) return;
 
-         slider.addEventListener('mouseleave', function () {
-            lastMouseX = null;
-         });
-      }
+      let lastMouseX = null;
+      const threshold = 20;
+
+      const onMouseMove = (e) => {
+         if (lastMouseX === null) {
+            lastMouseX = e.clientX;
+            return;
+         }
+
+         const deltaX = e.clientX - lastMouseX;
+         if (Math.abs(deltaX) > threshold) {
+            deltaX > 0 ? swiperInstance.slideNext() : swiperInstance.slidePrev();
+            lastMouseX = e.clientX;
+         }
+      };
+
+      const onMouseLeave = () => {
+         lastMouseX = null;
+      };
+
+      slider.addEventListener('mousemove', onMouseMove);
+      slider.addEventListener('mouseleave', onMouseLeave);
    });
-});
+}
 
 
 
 /*==========================================================================
 Reviews slider
 ============================================================================*/
-const reviewsSlider = document.querySelector(".reviews__slider");
+function initReviewsSlider() {
+   const reviewsSlider = document.querySelector('.reviews__slider');
+   if (!reviewsSlider || typeof Swiper === 'undefined') return;
 
-if (reviewsSlider) {
-   const reviewsSwiper = new Swiper(reviewsSlider, {
+   new Swiper(reviewsSlider, {
       slidesPerView: 1,
       loop: true,
       spaceBetween: 0,
@@ -503,7 +498,9 @@ if (reviewsSlider) {
 /*==========================================================================
 Best slider
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", function () {
+function initBestSlider() {
+   const bestSlider = document.querySelector('.best__slider');
+   if (!bestSlider || typeof Swiper === 'undefined') return;
 
    function carouselEffect({ swiper, on, extendParams }) {
       extendParams({
@@ -514,51 +511,61 @@ document.addEventListener("DOMContentLoaded", function () {
          }
       });
 
-      on("beforeInit", () => {
-         if (swiper.params.effect !== "carousel") return;
-         swiper.classNames.push(`${swiper.params.containerModifierClass}carousel`);
+      on('beforeInit', () => {
+         if (swiper.params.effect !== 'carousel') return;
+
+         swiper.classNames.push(
+            `${swiper.params.containerModifierClass}carousel`
+         );
+
          Object.assign(swiper.params, {
             watchSlidesProgress: true,
             centeredSlides: true
          });
+
          Object.assign(swiper.originalParams, {
             watchSlidesProgress: true,
             centeredSlides: true
          });
       });
 
-      on("progress", () => {
-         if (swiper.params.effect !== "carousel") return;
+      on('progress', () => {
+         if (swiper.params.effect !== 'carousel') return;
 
          const { scaleStep, opacityStep, sideSlides } = swiper.params.carouselEffect;
+
          const maxSide = Math.max(Math.min(sideSlides, 3), 1);
          const l = { 1: 2, 2: 1, 3: 0.2 }[maxSide];
          const o = { 1: 50, 2: 50, 3: 67 }[maxSide];
-         const r = swiper.slides.length;
+         const slidesCount = swiper.slides.length;
 
-         for (let i = 0; i < r; i++) {
+         for (let i = 0; i < slidesCount; i++) {
             const slide = swiper.slides[i];
             const progress = slide.progress;
-            const y = Math.abs(progress);
+            const absProgress = Math.abs(progress);
 
-            let u = 1;
-            if (y > 1) u = (y - 1) * 0.3 * l + 1;
+            let modifier = 1;
+            if (absProgress > 1) {
+               modifier = (absProgress - 1) * 0.3 * l + 1;
+            }
 
-            const v = `${progress * u * o * (swiper.rtlTranslate ? -1 : 1)}%`;
-            const scale = 1 - y * scaleStep;
-            const zIndex = r - Math.abs(Math.round(progress));
+            const translate = `${progress * modifier * o * (swiper.rtlTranslate ? -1 : 1)}%`;
+            const scale = 1 - absProgress * scaleStep;
+            const zIndex = slidesCount - Math.abs(Math.round(progress));
 
-            slide.style.transform = `translateX(${v}) scale(${scale})`;
+            slide.style.transform = `translateX(${translate}) scale(${scale})`;
             slide.style.zIndex = zIndex;
-            slide.style.opacity = y > maxSide + 1 ? 0 : 1;
+            slide.style.opacity = absProgress > maxSide + 1 ? 0 : 1;
 
-            slide.querySelectorAll(".swiper-carousel-animate-opacity").forEach(el => {
-               el.style.opacity = 1 - y * opacityStep;
-            });
+            slide
+               .querySelectorAll('.swiper-carousel-animate-opacity')
+               .forEach(el => {
+                  el.style.opacity = 1 - absProgress * opacityStep;
+               });
          }
       });
 
-      on("resize", () => {
+      on('resize', () => {
          if (swiper.virtual && swiper.params.virtual?.enabled) {
             requestAnimationFrame(() => {
                if (!swiper.destroyed) {
@@ -569,199 +576,185 @@ document.addEventListener("DOMContentLoaded", function () {
          }
       });
 
-      on("setTransition", (_, duration) => {
-         if (swiper.params.effect !== "carousel") return;
+      on('setTransition', (_, duration) => {
+         if (swiper.params.effect !== 'carousel') return;
+
          swiper.slides.forEach(slide => {
             slide.style.transitionDuration = `${duration}ms`;
-            slide.querySelectorAll(".swiper-carousel-animate-opacity").forEach(el => {
-               el.style.transitionDuration = `${duration}ms`;
-            });
+            slide
+               .querySelectorAll('.swiper-carousel-animate-opacity')
+               .forEach(el => {
+                  el.style.transitionDuration = `${duration}ms`;
+               });
          });
       });
    }
 
-   const bestSlider = document.querySelector(".best__slider");
-   if (bestSlider) {
-      const bestSwiper = new Swiper(bestSlider, {
-         effect: "carousel",
-         grabCursor: true,
-         loop: true,
-         loopAdditionalSlides: 1,
-         slidesPerView: "auto",
-         autoplay: {
-            delay: 3000
-         },
-         modules: [carouselEffect]
-      });
-   }
-
-});
-
+   new Swiper(bestSlider, {
+      effect: 'carousel',
+      grabCursor: true,
+      loop: true,
+      loopAdditionalSlides: 1,
+      slidesPerView: 'auto',
+      autoplay: {
+         delay: 3000
+      },
+      modules: [carouselEffect]
+   });
+}
 
 /*==========================================================================
 Sort
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", () => {
-   const sorts = document.querySelectorAll(".catalog__sort");
-
+function initCatalogSort() {
+   const sorts = document.querySelectorAll('.catalog__sort');
    if (!sorts.length) return;
 
-   sorts.forEach((sort) => {
-      const btn = sort.querySelector(".catalog__sort-btn");
-      const params = sort.querySelector(".catalog__sort-params");
+   sorts.forEach(sort => {
+      const btn = sort.querySelector('.catalog__sort-btn');
+      const params = sort.querySelector('.catalog__sort-params');
 
       if (!btn || !params) return;
 
-      btn.addEventListener("click", (e) => {
+      btn.addEventListener('click', (e) => {
          e.stopPropagation();
 
-         // Закрываем все остальные
-         sorts.forEach((other) => {
+         // закрываем остальные
+         sorts.forEach(other => {
             if (other !== sort) {
-               other.querySelector(".catalog__sort-btn")?.classList.remove("active");
-               other.querySelector(".catalog__sort-params")?.classList.remove("show");
+               other.querySelector('.catalog__sort-btn')?.classList.remove('active');
+               other.querySelector('.catalog__sort-params')?.classList.remove('show');
             }
          });
 
-         btn.classList.toggle("active");
-         params.classList.toggle("show");
+         btn.classList.toggle('active');
+         params.classList.toggle('show');
       });
 
-      params.addEventListener("click", (e) => {
-         if (e.target.closest("a")) {
-            btn.classList.remove("active");
-            params.classList.remove("show");
+      params.addEventListener('click', (e) => {
+         if (e.target.closest('a')) {
+            btn.classList.remove('active');
+            params.classList.remove('show');
          }
       });
    });
 
-   // Глобальное закрытие по клику вне
-   document.addEventListener("click", (e) => {
-      sorts.forEach((sort) => {
+   // клик вне сортировки
+   document.addEventListener('click', (e) => {
+      sorts.forEach(sort => {
          if (!sort.contains(e.target)) {
-            sort.querySelector(".catalog__sort-btn")?.classList.remove("active");
-            sort.querySelector(".catalog__sort-params")?.classList.remove("show");
+            sort.querySelector('.catalog__sort-btn')?.classList.remove('active');
+            sort.querySelector('.catalog__sort-params')?.classList.remove('show');
          }
       });
    });
-});
+}
 
 /*==========================================================================
 Scroll top
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", () => {
-   const goToTopBtn = document.querySelector(".go-to-top");
+function initScrollTop() {
+   const goToTopBtn = document.querySelector('.go-to-top');
    if (!goToTopBtn) return;
 
-   const toggleButtonVisibility = () => {
-      const triggerHeight = window.innerHeight;
-
-      if (window.scrollY > triggerHeight) {
-         goToTopBtn.classList.add("show");
-      } else {
-         goToTopBtn.classList.remove("show");
-      }
+   const toggleVisibility = () => {
+      goToTopBtn.classList.toggle(
+         'show',
+         window.scrollY > window.innerHeight
+      );
    };
 
-   window.addEventListener("scroll", toggleButtonVisibility);
+   window.addEventListener('scroll', toggleVisibility);
 
-   goToTopBtn.addEventListener("click", () => {
+   goToTopBtn.addEventListener('click', () => {
       window.scrollTo({
          top: 0,
-         behavior: "smooth",
+         behavior: 'smooth',
       });
    });
 
-   toggleButtonVisibility();
-});
+   toggleVisibility();
+}
 
 
 /*==========================================================================
 Aside
 ============================================================================*/
-document.addEventListener("DOMContentLoaded", () => {
-   const toggle = document.querySelector(".catalog__filter-toggle");
-   const aside = document.querySelector(".catalog__aside");
-   const close = document.querySelector(".aside__close");
+function initCatalogAside() {
+   const toggle = document.querySelector('.catalog__filter-toggle');
+   const aside = document.querySelector('.catalog__aside');
+   const closeBtn = document.querySelector('.aside__close');
    const body = document.body;
 
    if (!toggle || !aside) return;
 
-   function openFilter() {
-      toggle.classList.add("active");
-      aside.classList.add("show");
-      body.classList.add("filter-opened");
-   }
+   const openFilter = () => {
+      toggle.classList.add('active');
+      aside.classList.add('show');
+      body.classList.add('filter-opened');
+   };
 
-   function closeFilter() {
-      toggle.classList.remove("active");
-      aside.classList.remove("show");
-      body.classList.remove("filter-opened");
-   }
+   const closeFilter = () => {
+      toggle.classList.remove('active');
+      aside.classList.remove('show');
+      body.classList.remove('filter-opened');
+   };
 
-   toggle.addEventListener("click", (e) => {
+   toggle.addEventListener('click', (e) => {
       e.stopPropagation();
-
-      if (aside.classList.contains("show")) {
-         closeFilter();
-      } else {
-         openFilter();
-      }
+      aside.classList.contains('show') ? closeFilter() : openFilter();
    });
 
-   if (close) {
-      close.addEventListener("click", () => {
-         closeFilter();
-      });
-   }
+   closeBtn?.addEventListener('click', closeFilter);
 
-   document.addEventListener("click", (e) => {
+   document.addEventListener('click', (e) => {
       if (!aside.contains(e.target) && !toggle.contains(e.target)) {
          closeFilter();
-      }
-   });
-
-});
-
-
-/*==========================================================================
-Bussones center slider
-============================================================================*/
-const bcSlider = document.querySelector(".business-center__slider");
-
-if (bcSlider) {
-   const bcSwiper = new Swiper(bcSlider, {
-      loop: true,
-      spaceBetween: 0,
-      effect: 'fade',
-      direction: "horizontal",
-      slidesPerView: 1,
-      pagination: {
-         el: ".business-center__pagination",
-         clickable: true,
-      },
-      speed: 1000,
-      autoplay: {
-         delay: 3000,
-         disableOnInteraction: false
       }
    });
 }
 
 
+/*==========================================================================
+Bussones center slider
+============================================================================*/
+function initBusinessCenterSlider() {
+   const bcSlider = document.querySelector('.business-center__slider');
+   if (!bcSlider || typeof Swiper === 'undefined') return;
+
+   new Swiper(bcSlider, {
+      loop: true,
+      effect: 'fade',
+      slidesPerView: 1,
+      spaceBetween: 0,
+      direction: 'horizontal',
+      speed: 1000,
+      autoplay: {
+         delay: 3000,
+         disableOnInteraction: false
+      },
+      pagination: {
+         el: '.business-center__pagination',
+         clickable: true,
+      },
+   });
+}
+
 
 /*------------------------------Галерея---------------------------*/
-const openBtn = document.getElementById('openGallery');
+function initGallery() {
+   const openBtn = document.getElementById('openGallery');
+   if (!openBtn) return;
 
-if (openBtn) {
    openBtn.addEventListener('click', () => {
       const slides = document.querySelectorAll('.business-center__slide');
       if (!slides.length) return;
+      if (typeof Fancybox === 'undefined' || !Fancybox.show) return;
 
       const items = Array.from(slides)
          .map(slide => {
             const img = slide.querySelector('img');
-            if (!img || !img.src) return null;
+            if (!img?.src) return null;
 
             return {
                src: img.src,
@@ -772,107 +765,116 @@ if (openBtn) {
          .filter(Boolean);
 
       if (!items.length) return;
-      if (typeof Fancybox === 'undefined' || !Fancybox.show) return;
 
       Fancybox.show(items);
    });
 }
 
 
+
 /*==========================================================================
 Hidden text
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', () => {
+function initHiddenText() {
    const hiddenText = document.querySelector('.hidden-text');
    if (!hiddenText) return;
 
    const wrapper = hiddenText.querySelector('.hidden-text__wrapper');
    const toggleBtn = hiddenText.querySelector('.hidden-text__toggle button');
-   const collapsedHeight = 160;
+   if (!wrapper || !toggleBtn) return;
 
-   wrapper.style.maxHeight = collapsedHeight + 'px';
+   const collapsedHeight = 160;
+   wrapper.style.maxHeight = `${collapsedHeight}px`;
 
    toggleBtn.addEventListener('click', () => {
       const isOpen = wrapper.classList.contains('open');
 
       if (isOpen) {
-         wrapper.style.maxHeight = collapsedHeight + 'px';
+         wrapper.style.maxHeight = `${collapsedHeight}px`;
          wrapper.classList.remove('open');
          toggleBtn.textContent = 'Показать больше';
       } else {
-         wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+         wrapper.style.maxHeight = `${wrapper.scrollHeight}px`;
          wrapper.classList.add('open');
          toggleBtn.textContent = 'Скрыть';
       }
    });
-});
+}
+
 
 
 /*==========================================================================
 Swiper in office card
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', function () {
-   document.querySelectorAll('.offices__item-slider').forEach(function (slider) {
+function initOfficeCardSwipers() {
+   const sliders = document.querySelectorAll('.offices__item-slider');
+   if (!sliders.length || typeof Swiper === 'undefined') return;
+
+   sliders.forEach(slider => {
+      const container = slider.closest('.offices__item-preview');
+      const paginationEl = container?.querySelector('.offices__item-pagination');
+
       const swiperInstance = new Swiper(slider, {
          loop: true,
          nested: true,
-         pagination: {
-            el: slider.closest('.offices__item-preview').querySelector('.offices__item-pagination'),
+         pagination: paginationEl ? {
+            el: paginationEl,
             clickable: true,
             type: 'bullets',
             bulletClass: 'swiper-pagination-bullet',
             bulletActiveClass: 'swiper-pagination-bullet-active',
-            renderBullet: function (index, className) {
-               return `<span class="${className}"></span>`;
-            },
-         },
+            renderBullet: (index, className) =>
+               `<span class="${className}"></span>`
+         } : undefined,
       });
 
-      if (window.innerWidth > 1024) {
-         let lastMouseX = null;
-         let threshold = 20;
-         slider.addEventListener('mousemove', function (event) {
-            if (lastMouseX !== null) {
-               let deltaX = event.clientX - lastMouseX;
-               if (Math.abs(deltaX) > threshold) {
-                  if (deltaX > 0) {
-                     swiperInstance.slideNext();
-                  } else {
-                     swiperInstance.slidePrev();
-                  }
-                  lastMouseX = event.clientX;
-               }
-            } else {
-               lastMouseX = event.clientX;
-            }
-         });
+      // управление мышью — только desktop
+      if (window.innerWidth <= 1024) return;
 
-         slider.addEventListener('mouseleave', function () {
-            lastMouseX = null;
-         });
-      }
+      let lastMouseX = null;
+      const threshold = 20;
+
+      const onMouseMove = (e) => {
+         if (lastMouseX === null) {
+            lastMouseX = e.clientX;
+            return;
+         }
+
+         const deltaX = e.clientX - lastMouseX;
+         if (Math.abs(deltaX) > threshold) {
+            deltaX > 0 ? swiperInstance.slideNext() : swiperInstance.slidePrev();
+            lastMouseX = e.clientX;
+         }
+      };
+
+      slider.addEventListener('mousemove', onMouseMove);
+      slider.addEventListener('mouseleave', () => {
+         lastMouseX = null;
+      });
    });
-});
+}
 
 
 /*==========================================================================
 Office tabs
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', () => {
+function initOfficeTabs() {
    const tabs = document.querySelectorAll('.offices__tab');
    const items = document.querySelectorAll('.offices__items');
    const loader = document.querySelector('.loading-icon');
-   let timeoutId = null; // для таймера лоадера
 
    if (!tabs.length || !items.length || !loader) return;
 
+   let timeoutId = null;
+
    tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-         const target = tab.dataset.tab;
-
          if (tab.classList.contains('active')) return;
 
-         // отменяем предыдущий таймер, если он есть
+         const target = tab.dataset.tab;
+         if (!target) return;
+
+         // отменяем предыдущий таймер
          if (timeoutId) {
             clearTimeout(timeoutId);
             timeoutId = null;
@@ -885,28 +887,25 @@ document.addEventListener('DOMContentLoaded', () => {
          // показать лоадер
          loader.classList.add('active');
 
-         // скрыть все табы
+         // скрыть контент
          items.forEach(item => item.classList.remove('active'));
 
-         // сбросить все анимации
+         // сбросить анимации
          document
             .querySelectorAll('.element-animation')
             .forEach(el => el.classList.remove('element-show'));
 
-         // запускаем таймер для имитации загрузки
          timeoutId = setTimeout(() => {
             loader.classList.remove('active');
 
             const targetItem = document.querySelector(
                `.offices__items[data-tab="${target}"]`
             );
-
             if (!targetItem) return;
 
-            // показываем контент
             targetItem.classList.add('active');
 
-            // 🔹 даём браузеру отрендерить контент, потом запускаем анимацию
+            // даём браузеру отрендерить DOM → затем анимация
             requestAnimationFrame(() => {
                requestAnimationFrame(() => {
                   targetItem
@@ -915,50 +914,45 @@ document.addEventListener('DOMContentLoaded', () => {
                });
             });
 
-            timeoutId = null; // таймер отработал
-         }, 300); // длительность лоадера
+            timeoutId = null;
+         }, 300);
       });
    });
-});
-
+}
 
 
 
 /*==========================================================================
 Офис слайдеры   
 ============================================================================*/
+function initOfficeGallerySliders() {
+   const thumbsSlider = document.querySelector('.office__gallery-slider');
+   const mainSlider = document.querySelector('.office__gallery-slider-2');
 
-const productGallerySlider = document.querySelector('.office__gallery-slider');
-const productGallerySlider2 = document.querySelector('.office__gallery-slider-2');
+   if (!thumbsSlider || !mainSlider || typeof Swiper === 'undefined') return;
 
-if (productGallerySlider && productGallerySlider2) {
-
-   const productSwiper = new Swiper(productGallerySlider, {
+   const thumbsSwiper = new Swiper(thumbsSlider, {
       direction: 'vertical',
       spaceBetween: 10,
       slidesPerView: 6,
+      watchSlidesProgress: true,
       freeMode: {
          enabled: true,
          momentum: true,
          momentumRatio: 1,
          momentumBounce: false,
       },
-      watchSlidesProgress: true,
    });
 
-   const productSwiper2 = new Swiper(productGallerySlider2, {
+   new Swiper(mainSlider, {
       direction: 'vertical',
       spaceBetween: 10,
       thumbs: {
-         swiper: productSwiper,
+         swiper: thumbsSwiper,
       },
       mousewheel: {
          releaseOnEdges: false,
          sensitivity: 2,
-      },
-      pagination: {
-         el: 'office__gallery-pagination',
-         clickable: true,
       },
       pagination: {
          el: '.office__gallery-pagination',
@@ -977,16 +971,13 @@ if (productGallerySlider && productGallerySlider2) {
          },
       },
    });
-
 }
-
 
 /*==========================================================================
 Офис галерея
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', () => {
+function initOfficeGalleryLightbox() {
    const openBtn = document.querySelector('.office__gallery-open');
-
    if (!openBtn) return;
    if (typeof Fancybox === 'undefined' || !Fancybox.show) return;
 
@@ -994,13 +985,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const slides = document.querySelectorAll(
          '.office__gallery-slider-2 .office__gallery-item'
       );
-
       if (!slides.length) return;
 
       const items = Array.from(slides)
          .map(slide => {
             const img = slide.querySelector('img');
-            if (!img || !img.src) return null;
+            if (!img?.src) return null;
 
             return {
                src: img.src,
@@ -1017,141 +1007,145 @@ document.addEventListener('DOMContentLoaded', () => {
          Toolbar: true,
       });
    });
-});
+}
 
 
 /*==========================================================================
 NEW BC PAGE SLIDER
 ============================================================================*/
-let bcSwiper = null;
+function initNewBcPageSlider() {
+   if (typeof Swiper === 'undefined') return;
 
-function updateBcSwiper() {
    const bcContainer = document.querySelector('.bc-hero__slider');
    if (!bcContainer) return;
 
    const bcWrapper = bcContainer.querySelector('.bc-hero__slider-wrapper');
-   const bcSlides = bcWrapper.querySelectorAll('.bc-hero__slide');
+   const bcSlides = bcWrapper?.querySelectorAll('.bc-hero__slide');
    const paginationElement = document.querySelector('.bc-hero__fraction');
 
-   if (window.innerWidth >= 1200) {
-      if (!bcSwiper) {
-         bcContainer.classList.add('swiper');
-         bcWrapper.classList.add('swiper-wrapper');
-         bcSlides.forEach(slide => slide.classList.add('swiper-slide'));
+   if (!bcWrapper || !bcSlides?.length) return;
 
-         bcSwiper = new Swiper('.bc-hero__slider', {
-            loop: false,
-            direction: 'vertical',
-            slidesPerView: 1,
-            watchOverflow: true,
-            simulateTouch: true,
-            noSwipingClass: '.swiper-no-swiping',
-            mousewheel: {
-               forceToAxis: true,
-               releaseOnEdges: true,
-               sensitivity: 1
-            },
-            allowTouchMove: true,
-            nested: true,
-            grabCursor: false,
-            slideToClickedSlide: false,
-            speed: 1500,
-            keyboard: {
-               enabled: true,
-               onlyInViewport: true,
-            },
-            pagination: {
-               el: '.bc-hero__fraction',
-               type: 'custom',
-               clickable: true,
-               renderCustom: function (swiper, current, total) {
-                  let paginationHtml = '';
-                  for (let i = 1; i <= total; i++) {
-                     paginationHtml += `<span class="swiper-pagination-item ${i === current ? 'active' : ''}" data-index="${i}">${i.toString().padStart(2, '0')}.</span>`;
-                  }
-                  return paginationHtml;
-               },
-            },
-            on: {
-               init(swiper) {
-                  updateActiveSlideLink(swiper);
-               },
-               slideChange(swiper) {
-                  updateActiveSlideLink(swiper);
-               }
-            }
-         });
+   let bcSwiper = null;
 
-         if (paginationElement) {
-            paginationElement.addEventListener('click', (e) => {
-               if (e.target.classList.contains('swiper-pagination-item')) {
-                  const index = parseInt(e.target.getAttribute('data-index'), 10);
+   const updateActiveSlideLink = (swiper) => {
+      document
+         .querySelectorAll('.js-slide-link')
+         .forEach(link => link.classList.remove('active'));
+
+      const activeLink = document.querySelector(
+         `.js-slide-link[data-slide="${swiper.activeIndex}"]`
+      );
+
+      activeLink?.classList.add('active');
+   };
+
+   const updateBcSwiper = () => {
+      if (window.innerWidth >= 1200) {
+         if (!bcSwiper) {
+            bcContainer.classList.add('swiper');
+            bcWrapper.classList.add('swiper-wrapper');
+            bcSlides.forEach(slide => slide.classList.add('swiper-slide'));
+
+            bcSwiper = new Swiper(bcContainer, {
+               loop: false,
+               direction: 'vertical',
+               slidesPerView: 1,
+               watchOverflow: true,
+               simulateTouch: true,
+               nested: true,
+               grabCursor: false,
+               slideToClickedSlide: false,
+               speed: 1500,
+               allowTouchMove: true,
+               mousewheel: {
+                  forceToAxis: true,
+                  releaseOnEdges: true,
+                  sensitivity: 1,
+               },
+               keyboard: {
+                  enabled: true,
+                  onlyInViewport: true,
+               },
+               pagination: {
+                  el: '.bc-hero__fraction',
+                  type: 'custom',
+                  clickable: true,
+                  renderCustom(swiper, current, total) {
+                     let html = '';
+                     for (let i = 1; i <= total; i++) {
+                        html += `
+                  <span
+                    class="swiper-pagination-item ${i === current ? 'active' : ''}"
+                    data-index="${i}"
+                  >
+                    ${String(i).padStart(2, '0')}.
+                  </span>
+                `;
+                     }
+                     return html;
+                  },
+               },
+               on: {
+                  init: updateActiveSlideLink,
+                  slideChange: updateActiveSlideLink,
+               },
+            });
+
+            paginationElement?.addEventListener('click', (e) => {
+               const item = e.target.closest('.swiper-pagination-item');
+               if (!item) return;
+
+               const index = Number(item.dataset.index);
+               if (!Number.isNaN(index)) {
                   bcSwiper.slideTo(index - 1);
                }
             });
          }
+      } else {
+         if (bcSwiper) {
+            bcSwiper.destroy(true, true);
+            bcSwiper = null;
+         }
 
+         bcContainer.classList.remove('swiper');
+         bcWrapper.classList.remove('swiper-wrapper');
+         bcSlides.forEach(slide => {
+            slide.classList.remove(
+               'swiper-slide',
+               'swiper-slide-active',
+               'swiper-slide-next',
+               'swiper-slide-prev'
+            );
+         });
+
+         if (paginationElement) paginationElement.innerHTML = '';
       }
-   } else {
-      if (bcSwiper) {
-         bcSwiper.destroy(true, true);
-         bcSwiper = null;
-      }
+   };
 
-      bcContainer.classList.remove('swiper');
-      bcWrapper.classList.remove('swiper-wrapper');
-      bcSlides.forEach(slide => {
-         slide.classList.remove(
-            'swiper-slide',
-            'swiper-slide-active',
-            'swiper-slide-next',
-            'swiper-slide-prev'
-         );
-      });
+   window.addEventListener('load', updateBcSwiper);
+   window.addEventListener('resize', updateBcSwiper);
 
-      if (paginationElement) paginationElement.innerHTML = '';
-   }
-}
-
-window.addEventListener('load', updateBcSwiper);
-window.addEventListener('resize', updateBcSwiper);
-
-function updateActiveSlideLink(swiper) {
-   const links = document.querySelectorAll('.js-slide-link');
-
-   links.forEach(link => link.classList.remove('active'));
-
-   const activeIndex = swiper.activeIndex;
-   const activeLink = document.querySelector(
-      `.js-slide-link[data-slide="${activeIndex}"]`
-   );
-
-   if (activeLink) {
-      activeLink.classList.add('active');
-   }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
    document.querySelectorAll('.js-slide-link').forEach(link => {
-      link.addEventListener('click', e => {
-         if (bcSwiper && window.innerWidth >= 1200) {
-            e.preventDefault();
+      link.addEventListener('click', (e) => {
+         if (!bcSwiper || window.innerWidth < 1200) return;
 
-            const index = Number(link.dataset.slide);
-            if (!Number.isNaN(index)) {
-               bcSwiper.slideTo(index, 1500);
-            }
+         e.preventDefault();
+         const index = Number(link.dataset.slide);
+         if (!Number.isNaN(index)) {
+            bcSwiper.slideTo(index, 1500);
          }
       });
    });
-});
+}
 
 
 /*==========================================================================
 Office tabs in bc page
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', () => {
+function initBcPageOfficeTabs() {
    const officesPopup = document.querySelector('.offices-popup');
+   if (!officesPopup) return;
+
    const tabs = officesPopup.querySelectorAll('.offices-popup__tab');
    const items = officesPopup.querySelectorAll('.offices-popup__items');
    const loader = officesPopup.querySelector('.loading-icon');
@@ -1160,37 +1154,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
    tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-         const target = tab.dataset.offices;
-
          if (tab.classList.contains('active')) return;
 
+         const target = tab.dataset.offices;
+         if (!target) return;
+
+         // активный таб
          tabs.forEach(t => t.classList.remove('active'));
          tab.classList.add('active');
 
+         // показать лоадер
          loader.classList.add('active');
 
+         // скрыть все блоки
          items.forEach(item => item.classList.remove('active'));
 
          setTimeout(() => {
             loader.classList.remove('active');
-
-            const targetItem = document.querySelector(`.offices-popup__items[data-offices="${target}"]`);
-            if (targetItem) {
-               targetItem.classList.add('active');
-            }
+            const targetItem = officesPopup.querySelector(`.offices-popup__items[data-offices="${target}"]`);
+            targetItem?.classList.add('active');
          }, 600);
       });
    });
-});
+}
+
 
 
 /*==========================================================================
 bc slider inter
 ============================================================================*/
-const interSlider = document.querySelector(".bc-hero__slide-gallery-images");
+function initBcPageInterSlider() {
+   const interSlider = document.querySelector(".bc-hero__slide-gallery-images");
+   if (!interSlider || typeof Swiper === 'undefined') return;
 
-if (interSlider) {
-   const interSwiper = new Swiper(interSlider, {
+   new Swiper(interSlider, {
       loop: true,
       freeMode: true,
       spaceBetween: 32,
@@ -1200,22 +1197,10 @@ if (interSlider) {
          disableOnInteraction: true
       },
       breakpoints: {
-         320: {
-            slidesPerView: 1.5,
-            spaceBetween: 10,
-         },
-         650: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-         },
-         1100: {
-            slidesPerView: 3,
-            spaceBetween: 32,
-         },
-         1600: {
-            slidesPerView: 4,
-            spaceBetween: 32,
-         }
+         320: { slidesPerView: 1.5, spaceBetween: 10 },
+         650: { slidesPerView: 2, spaceBetween: 20 },
+         1100: { slidesPerView: 3, spaceBetween: 32 },
+         1600: { slidesPerView: 4, spaceBetween: 32 },
       }
    });
 }
@@ -1224,82 +1209,81 @@ if (interSlider) {
 /*==========================================================================
 Galleries
 ============================================================================*/
-Fancybox.bind('[data-fancybox]', {
-   groupAll: false
-});
+function initBcPageGalleries() {
+   if (typeof Fancybox === 'undefined' || !Fancybox.bind) return;
 
+   Fancybox.bind('[data-fancybox]', { groupAll: false });
 
-document.addEventListener('DOMContentLoaded', () => {
    const openBtn = document.getElementById('js-open-offices-gallery');
    if (!openBtn) return;
 
    openBtn.addEventListener('click', () => {
-      Fancybox.show(
-         Array.from(document.querySelectorAll('[data-fancybox="offices"]')).map(el => ({
-            src: el.getAttribute('href'),
-            type: 'image',
-         })),
-         {
-            startIndex: 0,
-         }
-      );
+      const items = Array.from(document.querySelectorAll('[data-fancybox="offices"]')).map(el => ({
+         src: el.getAttribute('href'),
+         type: 'image',
+      }));
+
+      if (items.length) {
+         Fancybox.show(items, { startIndex: 0 });
+      }
    });
-});
+}
 
 
 /*==========================================================================
 Map
 ============================================================================*/
-ymaps.ready(function () {
-   var mapCenter = [55.742405, 37.629388];
+function initMap() {
+   const mapElement = document.getElementById('map');
+   if (!mapElement) return;
 
-   var myMap = new ymaps.Map('map', {
-      center: mapCenter,
-      zoom: 13,
-   }, {
-      searchControlProvider: 'yandex#search'
-   });
+   if (typeof ymaps === 'undefined') return;
 
-   var iconImageSize = window.innerWidth < 768 ? [60, 80] : [90, 100];
-   var iconImageOffset = window.innerWidth < 768 ? [-42.5, -100] : [-67, -130];
+   ymaps.ready(() => {
+      const mapCenter = [55.742405, 37.629388];
+      const myMap = new ymaps.Map('map', {
+         center: mapCenter,
+         zoom: 13,
+      }, {
+         searchControlProvider: 'yandex#search'
+      });
 
-   var MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-      '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
-   );
+      let iconImageSize = window.innerWidth < 768 ? [60, 80] : [90, 100];
+      let iconImageOffset = window.innerWidth < 768 ? [-42.5, -100] : [-67, -130];
 
-   var myPlacemark = new ymaps.Placemark([55.742405, 37.629388], {
-      hintContent: 'Офисы в Москве',
-      balloonContent: 'Россия, Москва, Пятницкий пер., д.3, м.Новокузнецкая'
-   }, {
-      iconLayout: 'default#image',
-      iconImageHref: 'img/map-location.png',
-      iconImageSize: iconImageSize,
-      iconImageOffset: iconImageOffset
-   });
+      const myPlacemark = new ymaps.Placemark(mapCenter, {
+         hintContent: 'Офисы в Москве',
+         balloonContent: 'Россия, Москва, Пятницкий пер., д.3, м.Новокузнецкая'
+      }, {
+         iconLayout: 'default#image',
+         iconImageHref: 'img/map-location.png',
+         iconImageSize: iconImageSize,
+         iconImageOffset: iconImageOffset
+      });
 
-   myMap.behaviors.disable('scrollZoom');
+      myMap.behaviors.disable('scrollZoom');
+      myMap.controls.remove('searchControl');
+      myMap.controls.remove('fullscreenControl');
+      myMap.controls.remove('rulerControl');
+      myMap.geoObjects.add(myPlacemark);
 
-   myMap.controls.remove('searchControl');
-   myMap.controls.remove('fullscreenControl');
-   myMap.controls.remove('rulerControl');
-   myMap.geoObjects.add(myPlacemark);
-
-   window.addEventListener('resize', function () {
-      if (myPlacemark) {
-         var newIconImageSize = window.innerWidth < 768 ? [85, 100] : [170, 200];
-         var newIconImageOffset = window.innerWidth < 768 ? [-42.5, -100] : [-85, -200];
+      window.addEventListener('resize', () => {
+         const newIconImageSize = window.innerWidth < 768 ? [85, 100] : [170, 200];
+         const newIconImageOffset = window.innerWidth < 768 ? [-42.5, -100] : [-85, -200];
          myPlacemark.options.set({
             iconImageSize: newIconImageSize,
             iconImageOffset: newIconImageOffset,
          });
-      }
+      });
    });
-});
+}
+
+
 
 /*==========================================================================
 Calendar
 ============================================================================*/
-document.addEventListener('DOMContentLoaded', () => {
+function initCalendar() {
    if (typeof AirDatepicker === 'undefined') return;
 
    const datepickers = document.querySelectorAll('.datepicker');
@@ -1314,6 +1298,40 @@ document.addEventListener('DOMContentLoaded', () => {
          autoClose: true
       });
    });
+}
+
+
+
+/*==========================================================================
+Init
+============================================================================*/
+document.addEventListener('DOMContentLoaded', () => {
+   initSubmenu();
+   initPreloader();
+   initHeaderFix();
+   initObserverAnimation();
+   initMoveButtons();
+   initRelatedSlider();
+   initFilterTabs();
+   initProductCardSwipers();
+   initReviewsSlider();
+   initBestSlider();
+   initCatalogSort();
+   initScrollTop();
+   initCatalogAside();
+   initBusinessCenterSlider();
+   initGallery();
+   initHiddenText();
+   initOfficeCardSwipers();
+   initOfficeTabs();
+   initOfficeGallerySliders();
+   initOfficeGalleryLightbox();
+   initNewBcPageSlider();
+   initBcPageOfficeTabs();
+   initBcPageInterSlider();
+   initBcPageGalleries();
+   initMap();
+   initCalendar();
 });
 
 })();
